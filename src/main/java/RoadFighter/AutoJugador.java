@@ -27,7 +27,7 @@ public class AutoJugador extends Vehiculo {
 	}
 
 	public void reaparecer() {
-		System.out.println(this.nombre + " ha reaparecido");
+		//System.out.println(this.nombre + " ha reaparecido");
 		this.reaparecer = true;
 	}
 
@@ -53,7 +53,8 @@ public class AutoJugador extends Vehiculo {
 
 	@Override
 	public void choqueConAutoJugador(AutoJugador auto) {
-		System.out.println(this.getNombre() + " y " + auto.getNombre() + " han chocado");
+		//System.out.println(this.getNombre() + " y " + auto.getNombre() + " han chocado");
+
 		if (!this.getEscudo()) {
 			if (!auto.getEscudo()) {
 				auto.perderElControl();
@@ -76,7 +77,8 @@ public class AutoJugador extends Vehiculo {
 
 	@Override
 	public void choqueConAutoObstaculo(AutoObstaculo auto) {
-		System.out.println(this.getNombre() + " y " + auto.getNombre() + " han chocado");
+		//System.out.println(this.getNombre() + " y " + auto.getNombre() + " han chocado");
+
 		if (!this.getEscudo()) {
 			auto.perderElControl();
 			this.perderElControl();
@@ -88,7 +90,8 @@ public class AutoJugador extends Vehiculo {
 
 	@Override
 	public void choqueConCamion(CamionObstaculo camion) {
-		System.out.println(this.getNombre() + " y " + camion.getNombre() + " han chocado");
+		//System.out.println(this.getNombre() + " y " + camion.getNombre() + " han chocado");
+
 		if (!this.getEscudo()) {
 			this.explotar();
 		} else {

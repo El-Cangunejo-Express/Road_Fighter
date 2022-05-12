@@ -34,13 +34,12 @@ public abstract class ObjetoDelMapa {
 	}
 
 	public void explotar() {
-		System.out.println(this.nombre + " ha explotado");
+		//System.out.println(this.nombre + " ha explotado");
 		explotar = true;
 	}
 
 	public boolean hayColisionCon(ObjetoDelMapa objeto) {
 		boolean hayColision = false;
-
 		double distX = this.coordenada.getDistanciaXCon(objeto.coordenada);
 		double distY = this.coordenada.getDistanciaYCon(objeto.coordenada);
 

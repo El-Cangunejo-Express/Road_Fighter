@@ -25,6 +25,7 @@ public class Carretera {
 		if ((xObjeto - objeto.getAncho() / 2) <= this.limIzq || (xObjeto + objeto.getAncho() / 2) >= this.limDer) {
 			estaFueraDelLimite = true;
 		}
+
 		return estaFueraDelLimite;
 	}
 
@@ -35,6 +36,7 @@ public class Carretera {
 					System.out.println(
 							objetosDeLaCarretera.get(i).getNombre() + " se salio de los limites de la carretea");
 					objetosDeLaCarretera.get(i).explotar();
+
 					if (objetosDeLaCarretera.get(i).desaparecer) {
 						objetosDeLaCarretera.remove(i);
 						i--;
@@ -52,18 +54,21 @@ public class Carretera {
 
 		for (int i = 0; i < objetosDeLaCarretera.size() - 1; i++) {
 			objeto1 = objetosDeLaCarretera.get(i);
+
 			for (int j = i + 1; j < objetosDeLaCarretera.size(); j++) {
 				objeto2 = objetosDeLaCarretera.get(j);
 
 				if (objeto1.hayColisionCon(objeto2)) {
 					if (objeto1.getTieneMovimiento()) {
 						Vehiculo vehiculo = (Vehiculo) objeto1;
+
 						vehiculo.choqueConObjeto(objeto2);
 					} else {
 						Vehiculo vehiculo = (Vehiculo) objeto2;
+
 						vehiculo.choqueConObjeto(objeto1);
 					}
-					
+
 					boorrarObj1 = objeto1.desaparecer;
 					boorrarObj2 = objeto2.desaparecer;
 
@@ -71,18 +76,19 @@ public class Carretera {
 						objetosDeLaCarretera.remove(i);
 						objetosDeLaCarretera.remove(i);
 						i--;
+
 						break;
 					} else if (boorrarObj1 && !boorrarObj2) {
 						objetosDeLaCarretera.remove(i);
 						i--;
+
 						break;
 					} else if (!boorrarObj1 && boorrarObj2) {
 						objetosDeLaCarretera.remove(j);
 						j--;
-					} 
+					}
 				}
 			}
-
 		}
 	}
 
@@ -95,6 +101,7 @@ public class Carretera {
 			objetosDeLaCarretera.add(objeto);
 			pudeAgregar = true;
 		}
+
 		return pudeAgregar;
 	}
 
@@ -112,6 +119,7 @@ public class Carretera {
 
 	public void actualizar() {
 		Collections.sort(objetosDeLaCarretera, new ComparadorDeObjetosDelMapa());
+
 		this.detectarObjetoFueraDeCarretera();
 		this.detectarChoque();
 	}

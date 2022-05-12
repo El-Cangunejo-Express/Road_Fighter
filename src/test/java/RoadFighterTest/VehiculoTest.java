@@ -14,16 +14,14 @@ import RoadFighter.Punto;
 public class VehiculoTest {
 
 	@Test
-	public void vehiculoIniciaEnReposo() {
+	public void vehiculo_Inicia_En_Reposo() {
 		AutoJugador pj = new AutoJugador(new Punto(0, 0), "Nahuel");
 
 		assertEquals((int) pj.getVelocidadActual(), 0);
 	}
 
 	@Test
-	public void acelerarIncrementaEnUnoLaVelocidad() {
-		System.out.println("++++TEST CASE: acelerarIncrementaEnUnoLaVelocidad++++");
-
+	public void acelerar_Incrementa_En_Uno_La_Velocidad() {
 		AutoJugador pj = new AutoJugador(new Punto(0, 0), "Nahuel");
 
 		pj.acelerar();
@@ -31,9 +29,7 @@ public class VehiculoTest {
 	}
 
 	@Test
-	public void JugadorNoPuedeAcelerarPorEncimaDeLaVelocidadMaxima() {
-		System.out.println("++++TEST CASE: JugadorNoPuedeAcelerarPorEncimaDeLaVelocidadMaxima++++");
-
+	public void Jugador_No_Puede_Acelerar_Por_Encima_De_La_Velocidad_Maxima() {
 		AutoJugador pj = new AutoJugador(new Punto(0, 0), "Nahuel");
 
 		// La velocidad maxima es 100
@@ -45,9 +41,7 @@ public class VehiculoTest {
 	}
 
 	@Test
-	public void AutoBotNoPuedeAcelerarPorEncimaDeLaVelocidadMaxima() {
-		System.out.println("++++TEST CASE: AutoBotNoPuedeAcelerarPorEncimaDeLaVelocidadMaxima++++");
-
+	public void Auto_Bot_No_Puede_Acelerar_Por_Encima_De_La_Velocidad_Maxima() {
 		AutoObstaculo bot = new AutoObstaculo(new Punto(0, 0));
 
 		// La velocidad maxima es 80
@@ -59,9 +53,7 @@ public class VehiculoTest {
 	}
 
 	@Test
-	public void CamionNoPuedeAcelerarPorEncimaDeLaVelocidadMaxima() {
-		System.out.println("++++TEST CASE: CamionNoPuedeAcelerarPorEncimaDeLaVelocidadMaxima++++");
-
+	public void Camion_No_Puede_Acelerar_Por_Encima_De_La_Velocidad_Maxima() {
 		CamionObstaculo bot = new CamionObstaculo(new Punto(0, 0));
 
 		// La velocidad maxima es 60
@@ -73,9 +65,7 @@ public class VehiculoTest {
 	}
 
 	@Test
-	public void NoAvanzarConJugabilidadBloqueada() {
-		System.out.println("++++TEST CASE: NoAvanzarConJugabilidadBloqueada++++");
-
+	public void No_Avanzar_Con_Jugabilidad_Bloqueada() {
 		AutoJugador pj = new AutoJugador(new Punto(0, 0), "Nahuel"); // Al inicio la jugabilidad esta bloqueada
 
 		pj.acelerar();
@@ -83,9 +73,7 @@ public class VehiculoTest {
 	}
 
 	@Test
-	public void AvanzarConJugabilidadDesbloqueada() {
-		System.out.println("++++TEST CASE: AvanzarConJugabilidadDesbloqueada++++");
-
+	public void Avanzar_Con_Jugabilidad_Desbloqueada() {
 		AutoJugador pj = new AutoJugador(new Punto(0, 0), "Nahuel");// Al inicio la jugabilidad esta bloqueada
 
 		pj.acelerar();
@@ -94,9 +82,7 @@ public class VehiculoTest {
 	}
 
 	@Test
-	public void AvanzaPosicionesSegunVelocidadActual() {
-		System.out.println("++++TEST CASE: AvanzaPosicionesSegunVelocidadActual++++");
-
+	public void Avanza_Posiciones_Segun_Velocidad_Actual() {
 		AutoJugador pj = new AutoJugador(new Punto(0, 0), "Nahuel");
 
 		pj.habilitarDesabilitarJugabilidad();
@@ -112,29 +98,23 @@ public class VehiculoTest {
 	}
 
 	@Test
-	public void FrenarDecrementaLaVelocidadEnUno() {
-		System.out.println("++++TEST CASE: FrenarDecrementaLaVelocidadEnUno++++");
-
+	public void Frenar_Decrementa_La_Velocidad_En_Uno() {
 		AutoJugador pj = new AutoJugador(new Punto(0, 0), "Nahuel");
 
 		pj.acelerar();// VELOCIDAD=1
 		pj.acelerar();// VELOCIDAD=2
 		pj.acelerar();// VELOCIDAD=3
-		System.out.println("La velocidad actual es: " + pj.getVelocidadActual());
 		pj.frenar();// VELOCIDAD=2
 		assertEquals((int) pj.getVelocidadActual(), 2);
 	}
 
 	@Test
-	public void alFrenarLaVelocidadNoEsNegativa() {
-		System.out.println("++++TEST CASE: alFrenarLaVelocidadNoEsNegativa++++");
-
+	public void al_Frenar_La_Velocidad_No_Es_Negativa() {
 		AutoJugador pj = new AutoJugador(new Punto(0, 0), "Nahuel");
 
 		pj.acelerar();// VELOCIDAD=1
 		pj.acelerar();// VELOCIDAD=2
 		pj.acelerar();// VELOCIDAD=3
-		System.out.println("La velocidad actual es: " + pj.getVelocidadActual());// Velocidad actual es 3
 		pj.frenar();// VELOCIDAD=2
 		pj.frenar();// VELOCIDAD=1
 		pj.frenar();// VELOCIDAD=0
@@ -146,9 +126,7 @@ public class VehiculoTest {
 	}
 
 	@Test
-	public void MoverALaDerecha() {
-		System.out.println("++++TEST CASE: MoverseALaDerecha++++");
-
+	public void Mover_A_La_Derecha() {
 		AutoJugador pj = new AutoJugador(new Punto(0, 0), "Nahuel");
 
 		pj.habilitarDesabilitarJugabilidad();
@@ -165,9 +143,7 @@ public class VehiculoTest {
 	}
 
 	@Test
-	public void MoverALaIzquiuera() {
-		System.out.println("++++TEST CASE: meMuevoIzquiuera++++");
-
+	public void Mover_A_La_Izquiuera() {
 		AutoJugador pj = new AutoJugador(new Punto(0, 0), "Nahuel");
 
 		pj.habilitarDesabilitarJugabilidad();
@@ -184,9 +160,7 @@ public class VehiculoTest {
 	}
 
 	@Test
-	public void ChocarYReaparecerSinVelocidadEnElCentroDelPlano() {
-		System.out.println("++++TEST CASE: ChocarYReaparecerSinVelocidadEnElCentroDelPlano++++");
-
+	public void Chocar_Y_Reaparecer_Sin_Velocidad_En_El_Centro_Del_Plano() {
 		AutoJugador pj = new AutoJugador(new Punto(0, 0), "Nahuel");
 
 		pj.habilitarDesabilitarJugabilidad();
@@ -197,9 +171,6 @@ public class VehiculoTest {
 		pj.avanzar();// COORDENADA Y=6
 		pj.irADerecha();// COORDENADA X=1
 		pj.irADerecha();// COORDENADA X=2
-
-		System.out.println("Velocidad Actual antes del choque: " + pj.getVelocidadActual());
-		System.out.println("La posicion actual antes del choque: " + pj.getCoordenada().toString());
 
 		pj.explotar();
 
