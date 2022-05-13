@@ -74,7 +74,7 @@ public class CarreteraTest {
 
 		carretera.actualizar(); // LO DETECTA DENTRO DE LOS LIMITES, NO EXPLOTA
 
-		assertFalse(pj.getExplotar());
+		assertFalse(pj.getExplote());
 		assertEquals((int) pj.getCoordenada().getX(), 134);
 	}
 
@@ -90,7 +90,7 @@ public class CarreteraTest {
 		pj.irADerecha(); // El auto toca el limite derecho
 		carretera.actualizar(); // LO DETECTA Y HACE EXPLOTAR EL VEHICULO
 
-		assertTrue(pj.getExplotar());
+		assertTrue(pj.getExplote());
 	}
 
 	@Test
@@ -114,8 +114,8 @@ public class CarreteraTest {
 		pj.avanzar(); // ACA YA DEBERIAN COLISIONAR
 		carretera.actualizar(); // DETECTA EL CHOQUE, Y LOS HACE EXPLOTAR
 
-		assertTrue(pj.getExplotar());
-		assertTrue(pozo.getExplotar());
+		assertTrue(pj.getExplote());
+		assertTrue(pozo.getExplote());
 	}
 
 	@Test

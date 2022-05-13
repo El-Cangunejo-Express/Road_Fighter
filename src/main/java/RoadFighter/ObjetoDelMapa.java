@@ -3,8 +3,8 @@ package RoadFighter;
 public abstract class ObjetoDelMapa {
 
 	/// ATRIBUTOD USADOS EN LOS TESTS
-	protected boolean explotar = false;
-	protected boolean perderControl = false;
+	protected boolean explote = false;
+	protected boolean perdiControl = false;
 	///
 	protected Punto coordenada;
 	protected double ancho;
@@ -34,8 +34,8 @@ public abstract class ObjetoDelMapa {
 	}
 
 	public void explotar() {
-		//System.out.println(this.nombre + " ha explotado");
-		explotar = true;
+		// System.out.println(this.nombre + " ha explotado");
+		explote = true;
 	}
 
 	public boolean hayColisionCon(ObjetoDelMapa objeto) {
@@ -58,12 +58,12 @@ public abstract class ObjetoDelMapa {
 
 	/// METODOS USADOS EN LOS TESTS
 
-	public boolean getExplotar() {
-		return this.explotar;
+	public boolean getExplote() {
+		return this.explote;
 	}
 
-	public boolean getPerderControl() {
-		return this.perderControl;
+	public boolean getPerdiControl() {
+		return this.perdiControl;
 	}
 
 	public double getTamanio() {

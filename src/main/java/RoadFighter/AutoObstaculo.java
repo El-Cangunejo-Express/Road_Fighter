@@ -19,7 +19,7 @@ public class AutoObstaculo extends Vehiculo {
 
 	@Override
 	public void choqueConAutoJugador(AutoJugador auto) {
-		//System.out.println(auto.getNombre() + " y " + this.getNombre() + " han chocado");
+		System.out.println(auto.getNombre() + " y " + this.getNombre() + " han chocado");
 
 		if (!auto.getEscudo()) {
 			auto.perderElControl();
@@ -33,14 +33,14 @@ public class AutoObstaculo extends Vehiculo {
 
 	@Override
 	public void choqueConAutoObstaculo(AutoObstaculo auto) {
-		//System.out.println(auto.getNombre() + " y " + this.getNombre() + " han chocado");
+		System.out.println(auto.getNombre() + " y " + this.getNombre() + " han chocado");
 		auto.perderElControl();
 		this.perderElControl();
 	}
 
 	@Override
 	public void choqueConCamion(CamionObstaculo camion) {
-		//System.out.println(this.getNombre() + " y " + camion.getNombre() + " han chocado");
+		System.out.println(this.getNombre() + " y " + camion.getNombre() + " han chocado");
 		this.explotar();
 		this.desaparecer = true;
 	}

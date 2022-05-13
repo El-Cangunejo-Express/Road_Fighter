@@ -2,7 +2,7 @@ package RoadFighter;
 
 public class AutoJugador extends Vehiculo {
 	/// ATRIBUTOD USADOS EN LOS TESTS
-	private boolean reaparecer = false;
+	private boolean reapareci = false;
 	///
 	private boolean tengoEscudo = false;
 	private double coordenadaXoriginal;
@@ -27,8 +27,9 @@ public class AutoJugador extends Vehiculo {
 	}
 
 	public void reaparecer() {
-		//System.out.println(this.nombre + " ha reaparecido");
-		this.reaparecer = true;
+		setearValoresIniciales();
+		System.out.println(this.nombre + " ha reaparecido");
+		this.reapareci = true;
 	}
 
 	public void obtenerEscudo() {
@@ -42,7 +43,6 @@ public class AutoJugador extends Vehiculo {
 	@Override
 	public void explotar() {
 		super.explotar();
-		setearValoresIniciales();
 		this.reaparecer();
 	}
 
@@ -53,7 +53,7 @@ public class AutoJugador extends Vehiculo {
 
 	@Override
 	public void choqueConAutoJugador(AutoJugador auto) {
-		//System.out.println(this.getNombre() + " y " + auto.getNombre() + " han chocado");
+		System.out.println(this.getNombre() + " y " + auto.getNombre() + " han chocado");
 
 		if (!this.getEscudo()) {
 			if (!auto.getEscudo()) {
@@ -71,13 +71,14 @@ public class AutoJugador extends Vehiculo {
 				auto.explotar();
 				auto.perderEscudo();
 			}
+			
 			this.perderEscudo();
 		}
 	}
 
 	@Override
 	public void choqueConAutoObstaculo(AutoObstaculo auto) {
-		//System.out.println(this.getNombre() + " y " + auto.getNombre() + " han chocado");
+		System.out.println(this.getNombre() + " y " + auto.getNombre() + " han chocado");
 
 		if (!this.getEscudo()) {
 			auto.perderElControl();
@@ -90,7 +91,7 @@ public class AutoJugador extends Vehiculo {
 
 	@Override
 	public void choqueConCamion(CamionObstaculo camion) {
-		//System.out.println(this.getNombre() + " y " + camion.getNombre() + " han chocado");
+		System.out.println(this.getNombre() + " y " + camion.getNombre() + " han chocado");
 
 		if (!this.getEscudo()) {
 			this.explotar();
@@ -115,7 +116,7 @@ public class AutoJugador extends Vehiculo {
 	/// METODOS USADOS EN LOS TESTS
 
 	public boolean getReaparecer() {
-		return this.reaparecer;
+		return this.reapareci;
 	}
 
 	public boolean getJuganilidadBloqueada() {

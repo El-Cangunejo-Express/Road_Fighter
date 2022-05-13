@@ -12,7 +12,7 @@ public class Pozo extends ObjetoDelMapa {
 
 	@Override
 	public void choqueConAutoJugador(AutoJugador auto) {
-		//System.out.println(auto.getNombre() + " ha chocado con " + this.getNombre());
+		System.out.println(auto.getNombre() + " ha chocado con " + this.getNombre());
 
 		if (!auto.getEscudo()) {
 			auto.explotar();
@@ -26,7 +26,7 @@ public class Pozo extends ObjetoDelMapa {
 
 	@Override
 	public void choqueConAutoObstaculo(AutoObstaculo auto) {
-		//System.out.println(auto.getNombre() + " ha chocado con " + this.getNombre());
+		System.out.println(auto.getNombre() + " ha chocado con " + this.getNombre());
 		this.explotar();
 		this.desaparecer = true;
 		auto.explotar();
@@ -35,7 +35,7 @@ public class Pozo extends ObjetoDelMapa {
 
 	@Override
 	public void choqueConCamion(CamionObstaculo camion) {
-		//System.out.println(camion.getNombre() + " ha chocado con " + this.getNombre());
+		System.out.println(camion.getNombre() + " ha chocado con " + this.getNombre());
 		this.explotar();
 		this.desaparecer = true;
 	}
