@@ -19,7 +19,7 @@ import RoadFighter.Punto;
 public class InteraccionesTest {
 
 	@Test
-	public void Jugador_Choca_Jugador_Pierde_El_Control() {
+	public void JugadorChocaJugadorPierdeElControl() {
 		AutoJugador pj1 = new AutoJugador(new Punto(0, 0), "Nahuel");
 		AutoJugador pj2 = new AutoJugador(new Punto(0, 0), "Denis");
 
@@ -30,7 +30,7 @@ public class InteraccionesTest {
 	}
 
 	@Test
-	public void Jugador_Choca_Bot_Pierde_El_Control() {
+	public void JugadorChocaBotPierdeElControl() {
 		AutoJugador pj = new AutoJugador(new Punto(0, 0), "Nahuel");
 		AutoObstaculo bot = new AutoObstaculo(new Punto(0, 0));
 
@@ -41,7 +41,7 @@ public class InteraccionesTest {
 	}
 
 	@Test
-	public void Jugador_Choca_Jugador_No_Explota() {
+	public void JugadorChocaJugadorNoExplota() {
 		AutoJugador pj1 = new AutoJugador(new Punto(0, 0), "Nahuel");
 		AutoJugador pj2 = new AutoJugador(new Punto(0, 0), "Denis");
 
@@ -51,7 +51,7 @@ public class InteraccionesTest {
 	}
 
 	@Test
-	public void Jugador_Choca_Bot_No_Explota() {
+	public void JugadorChocaBotNoExplota() {
 		AutoJugador pj = new AutoJugador(new Punto(0, 0), "Nahuel");
 		AutoObstaculo bot = new AutoObstaculo(new Punto(0, 0));
 
@@ -62,7 +62,7 @@ public class InteraccionesTest {
 	}
 
 	@Test
-	public void Jugador_Choca_Camion_Y_Explota_Solo_El_Jugador() {
+	public void JugadorChocaCamionYExplotaSoloElJugador() {
 		AutoJugador pj = new AutoJugador(new Punto(0, 0), "Nahuel");
 		CamionObstaculo bot = new CamionObstaculo(new Punto(0, 0));
 
@@ -72,7 +72,7 @@ public class InteraccionesTest {
 	}
 
 	@Test
-	public void Bot_Choca_Camion_Y_Explota_Solo_El_Bot() {
+	public void BotChocaCamionYExplotaSoloElBot() {
 		AutoObstaculo bot1 = new AutoObstaculo(new Punto(0, 0));
 		CamionObstaculo bot2 = new CamionObstaculo(new Punto(0, 0));
 
@@ -82,7 +82,7 @@ public class InteraccionesTest {
 	}
 
 	@Test
-	public void Jugador_Choca_Con_Aceite_Y_Pierde_Control() {
+	public void JugadorChocaConAceiteYPierdeControl() {
 		AutoJugador pj = new AutoJugador(new Punto(0, 0), "Nahuel");
 		ManchaDeAceite aceite = new ManchaDeAceite(new Punto(0, 0));
 
@@ -91,7 +91,7 @@ public class InteraccionesTest {
 	}
 
 	@Test
-	public void Auto_Bot_Choca_Con_Aceite_Y_Pierde_Control() {
+	public void AutoBotChocaConAceiteYPierdeControl() {
 		AutoObstaculo bot = new AutoObstaculo(new Punto(0, 0));
 		ManchaDeAceite aceite = new ManchaDeAceite(new Punto(0, 0));
 
@@ -100,7 +100,7 @@ public class InteraccionesTest {
 	}
 
 	@Test
-	public void Camion_Choca_Con_Aceite_Y_No_Pierde_Control() {
+	public void CamionChocaConAceiteYNoPierdeControl() {
 		CamionObstaculo camion = new CamionObstaculo(new Punto(0, 0));
 		ManchaDeAceite aceite = new ManchaDeAceite(new Punto(0, 0));
 
@@ -110,7 +110,7 @@ public class InteraccionesTest {
 	}
 
 	@Test
-	public void Jugador_Choca_Con_Pozo_Y_Explota() {
+	public void JugadorChocaConPozoYExplota() {
 		AutoJugador pj = new AutoJugador(new Punto(0, 0), "Nahuel");
 		Pozo pozo = new Pozo(new Punto(0, 0));
 
@@ -119,7 +119,7 @@ public class InteraccionesTest {
 	}
 
 	@Test
-	public void Bot_Choca_Con_Pozo_Y_Explota() {
+	public void BotChocaConPozoYExplota() {
 		AutoObstaculo bot = new AutoObstaculo(new Punto(0, 0));
 		Pozo pozo = new Pozo(new Punto(0, 0));
 
@@ -128,7 +128,7 @@ public class InteraccionesTest {
 	}
 
 	@Test
-	public void Camion_Choca_Con_Pozo_Y_No_Explota() {
+	public void CamionChocaConPozoYNoExplota() {
 		CamionObstaculo camion = new CamionObstaculo(new Punto(0, 0));
 		Pozo pozo = new Pozo(new Punto(0, 0));
 
@@ -138,7 +138,7 @@ public class InteraccionesTest {
 	}
 
 	@Test
-	public void Jugador_Choca_Pozo_Con_Escudo_No_Explota_Y_Pierde_Escudo() {
+	public void JugadorChocaPozoConEscudoNoExplotaYPierdeEscudo() {
 		AutoJugador pj = new AutoJugador(new Punto(0, 0), "Nahuel");
 		Pozo pozo = new Pozo(new Punto(0, 0));
 		Escudo escudo = new Escudo(new Punto(0, 0));
@@ -150,7 +150,7 @@ public class InteraccionesTest {
 	}
 
 	@Test
-	public void Jugador_Choca_Pozo_Con_Escudo_Dos_Veces_Y_Explota() {
+	public void JugadorChocaPozoConEscudoDosVecesYExplota() {
 		AutoJugador pj = new AutoJugador(new Punto(0, 0), "Nahuel");
 		Pozo pozo = new Pozo(new Punto(0, 0));
 		Escudo escudo = new Escudo(new Punto(0, 0));
@@ -163,7 +163,7 @@ public class InteraccionesTest {
 	}
 
 	@Test
-	public void Jugador_Se_Equipa_Con_Escudo_Al_Chocarlo() {
+	public void JugadorSeEquipaConEscudoAlChocarlo() {
 		AutoJugador pj = new AutoJugador(new Punto(0, 0), "Nahuel");
 		Escudo escudo = new Escudo(new Punto(0, 0));
 
@@ -172,7 +172,7 @@ public class InteraccionesTest {
 	}
 
 	@Test
-	public void Los_Auto_Bots_No_Se_Pueden_Equipar_Con_Escudo() {
+	public void LosAutoBotsNoSePuedenEquiparConEscudo() {
 		AutoObstaculo bot = new AutoObstaculo(new Punto(0, 0));
 		Escudo escudo = new Escudo(new Punto(0, 0));
 
@@ -181,7 +181,7 @@ public class InteraccionesTest {
 	}
 
 	@Test
-	public void Los_Camiones_No_Se_Pueden_Equipar_Con_Escudo() {
+	public void LosCamionesNoSePuedenEquiparConEscudo() {
 		CamionObstaculo camion = new CamionObstaculo(new Punto(0, 0));
 		Escudo escudo = new Escudo(new Punto(0, 0));
 
@@ -190,7 +190,7 @@ public class InteraccionesTest {
 	}
 
 	@Test
-	public void Auto_Bot_Explota_Cuando_Es_Chocado_Por_Jugador_Con_Escudo() {
+	public void AutoBotExplotaCuandoEsChocadoPorJugadorConEscudo() {
 		AutoJugador pj = new AutoJugador(new Punto(0, 0), "Nahuel");
 		AutoObstaculo bot = new AutoObstaculo(new Punto(0, 0));
 		Escudo escudo = new Escudo(new Punto(0, 0));
@@ -202,7 +202,7 @@ public class InteraccionesTest {
 	}
 
 	@Test
-	public void Camion_Explota_Cuando_Es_Chocado_Por_Jugador_Con_Escudo() {
+	public void CamionExplotaCuandoEsChocadoPorJugadorConEscudo() {
 		AutoJugador pj = new AutoJugador(new Punto(0, 0), "Nahuel");
 		CamionObstaculo camion = new CamionObstaculo(new Punto(0, 0));
 		Escudo escudo = new Escudo(new Punto(0, 0));
@@ -214,7 +214,7 @@ public class InteraccionesTest {
 	}
 
 	@Test
-	public void Los_Escudos_No_Son_Acumulables() {
+	public void LosEscudosNoSonAcumulables() {
 		AutoJugador pj = new AutoJugador(new Punto(0, 0), "Nahuel");
 		AutoObstaculo bot = new AutoObstaculo(new Punto(0, 0));
 		CamionObstaculo bot2 = new CamionObstaculo(new Punto(0, 0));
@@ -231,7 +231,7 @@ public class InteraccionesTest {
 	}
 
 	@Test
-	public void Chocar_Acelerador_Extremo_Incrementa_Velocidad_Actual_Por_Encima_De_Velocidad_Maxima() {
+	public void ChocarAceleradorExtremoIncrementaVelocidadActualPorEncimaDeVelocidadMaxima() {
 		AutoJugador pj = new AutoJugador(new Punto(0, 0), "Nahuel");
 		AceleradorExtremo acelerador = new AceleradorExtremo(new Punto(0, 0));
 
@@ -243,7 +243,7 @@ public class InteraccionesTest {
 	}
 
 	@Test
-	public void Acelerador_Extremo_No_Permite_Al_Auto_Jugador_Frenar_Ni_Acelerar() {
+	public void AceleradorExtremoNoPermiteAlAutoJugadorFrenarNiAcelerar() {
 		AutoJugador pj = new AutoJugador(new Punto(0, 0), "Nahuel");
 		AceleradorExtremo acelerador = new AceleradorExtremo(new Punto(0, 0));
 
@@ -254,7 +254,7 @@ public class InteraccionesTest {
 	}
 
 	@Test
-	public void Un_Bot_No_Choca_Con_Acelerador__Extremo_Y_No_Aumenta_Su_Velocidad() {
+	public void UnBotNoChocaConAceleradorExtremoYNoAumentaSuVelocidad() {
 		AutoObstaculo bot = new AutoObstaculo(new Punto(0, 0));
 		AceleradorExtremo acelerador = new AceleradorExtremo(new Punto(0, 0));
 
@@ -265,7 +265,7 @@ public class InteraccionesTest {
 	}
 
 	@Test
-	public void Auto_Jugador_Explota_Teniendo_Acelerador_Extremo_Y_Lo_Pierde() {
+	public void AutoJugadorExplotaTeniendoAceleradorExtremoYLoPierde() {
 		AutoJugador pj = new AutoJugador(new Punto(0, 0), "Nahuel");
 		AceleradorExtremo velocidad = new AceleradorExtremo(new Punto(0, 0));
 		CamionObstaculo bot2 = new CamionObstaculo(new Punto(0, 0));
@@ -279,7 +279,7 @@ public class InteraccionesTest {
 	}
 
 	@Test
-	public void Auto_Jugador_Choca_Con_Miniaturizador_Su_Ancho_Y_Largo_Se_Reducen_A_La_Mitad() {
+	public void AutoJugadorChocaConMiniaturizadorSuAnchoYLargoSeReducenALaMitad() {
 		AutoJugador pj = new AutoJugador(new Punto(0, 0), "Nahuel");
 		Miniaturizador miniaturizacion = new Miniaturizador(new Punto(0, 0));
 
@@ -289,7 +289,7 @@ public class InteraccionesTest {
 	}
 
 	@Test
-	public void Auto_Obstaculo_Choca_Con_Miniaturizador_No_Pasa_Nada() {
+	public void AutoObstaculoChocaConMiniaturizadorNoPasaNada() {
 		AutoObstaculo bot = new AutoObstaculo(new Punto(0, 0));
 		Miniaturizador miniaturizacion = new Miniaturizador(new Punto(0, 0));
 
@@ -299,7 +299,7 @@ public class InteraccionesTest {
 	}
 
 	@Test
-	public void Camion_Obstaculo_Choca_Con_Miniaturizador_No_Pasa_Nada() {
+	public void CamionObstaculoChocaConMiniaturizadorNoPasaNada() {
 		CamionObstaculo bot = new CamionObstaculo(new Punto(0, 0));
 		Miniaturizador miniaturizacion = new Miniaturizador(new Punto(0, 0));
 
@@ -309,7 +309,7 @@ public class InteraccionesTest {
 	}
 
 	@Test
-	public void Jugador_Explota_Teniendo_Miniaturizador_Vuelve_A_La_Normalidad() {
+	public void JugadorExplotaTeniendoMiniaturizadorVuelveALaNormalidad() {
 		AutoJugador pj = new AutoJugador(new Punto(0, 0), "Nahuel");
 		CamionObstaculo bot2 = new CamionObstaculo(new Punto(0, 0));
 		Miniaturizador miniaturizacion = new Miniaturizador(new Punto(0, 0));

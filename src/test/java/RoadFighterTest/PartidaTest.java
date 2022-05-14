@@ -17,7 +17,7 @@ import RoadFighter.Punto;
 public class PartidaTest {
 
 	@Test
-	public void Agregar_Un_Jugador_A_La_Partida() {
+	public void AgregarUnJugadorALaPartida() {
 		Partida partida = new Partida();
 
 		Jugador pj = new Jugador("Nahuel");
@@ -26,7 +26,7 @@ public class PartidaTest {
 	}
 
 	@Test
-	public void No_Se_Agrega_Jugador_Si_La_Partida_Esta_Llena() {
+	public void NoSeAgregaJugadorSiLaPartidaEstaLlena() {
 		Partida partida = new Partida();
 
 		Jugador pj1 = new Jugador("Nahuel");
@@ -47,7 +47,7 @@ public class PartidaTest {
 	}
 
 	@Test
-	public void No_Puedo_Iniciar_La_Partida_Con_Menos_De_Dos_Jugadores() {
+	public void NoPuedoIniciarLaPartidaConMenosDeDosJugadores() {
 		Partida partida = new Partida();
 
 		Jugador pj = new Jugador("Nahuel");
@@ -57,7 +57,7 @@ public class PartidaTest {
 	}
 
 	@Test
-	public void Todos_Los_Vehiculos_De_Los_Jugadores_Inician_En_La_Misma_Linea() {
+	public void TodosLosVehiculosDeLosJugadoresInicianEnLaMismaLinea() {
 		Partida partida = new Partida();
 
 		Jugador pj1 = new Jugador("Nahuel");
@@ -84,7 +84,7 @@ public class PartidaTest {
 	}
 
 	@Test
-	public void Mostrar_Puntaje_De_Los_Jugadores_Acorde_Cuanto_Avanzaron() {
+	public void MostrarPuntajeDeLosJugadoresAcordeCuantoAvanzaron() {
 		Partida partida = new Partida();
 
 		Jugador pj1 = new Jugador("Nahuel");
@@ -140,7 +140,7 @@ public class PartidaTest {
 	}
 
 	@Test
-	public void Verificar_Ganador() {
+	public void VerificarGanador() {
 		Partida partida = new Partida();
 
 		partida.agregarJugador(new Jugador("Nahuel"));

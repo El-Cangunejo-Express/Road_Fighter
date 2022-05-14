@@ -14,14 +14,14 @@ import RoadFighter.Punto;
 public class VehiculoTest {
 
 	@Test
-	public void vehiculo_Inicia_En_Reposo() {
+	public void vehiculoIniciaEnReposo() {
 		AutoJugador pj = new AutoJugador(new Punto(0, 0), "Nahuel");
 
 		assertEquals((int) pj.getVelocidadActual(), 0);
 	}
 
 	@Test
-	public void acelerar_Incrementa_En_Uno_La_Velocidad() {
+	public void acelerarIncrementaEnUnoLaVelocidad() {
 		AutoJugador pj = new AutoJugador(new Punto(0, 0), "Nahuel");
 
 		pj.acelerar();
@@ -29,7 +29,7 @@ public class VehiculoTest {
 	}
 
 	@Test
-	public void Jugador_No_Puede_Acelerar_Por_Encima_De_La_Velocidad_Maxima() {
+	public void JugadorNoPuedeAcelerarPorEncimaDeLaVelocidadMaxima() {
 		AutoJugador pj = new AutoJugador(new Punto(0, 0), "Nahuel");
 
 		// La velocidad maxima es 100
@@ -41,7 +41,7 @@ public class VehiculoTest {
 	}
 
 	@Test
-	public void Auto_Bot_No_Puede_Acelerar_Por_Encima_De_La_Velocidad_Maxima() {
+	public void AutoBotNoPuedeAcelerarPorEncimaDeLaVelocidadMaxima() {
 		AutoObstaculo bot = new AutoObstaculo(new Punto(0, 0));
 
 		// La velocidad maxima es 80
@@ -53,7 +53,7 @@ public class VehiculoTest {
 	}
 
 	@Test
-	public void Camion_No_Puede_Acelerar_Por_Encima_De_La_Velocidad_Maxima() {
+	public void CamionNoPuedeAcelerarPorEncimaDeLaVelocidadMaxima() {
 		CamionObstaculo bot = new CamionObstaculo(new Punto(0, 0));
 
 		// La velocidad maxima es 60
@@ -65,7 +65,7 @@ public class VehiculoTest {
 	}
 
 	@Test
-	public void No_Avanzar_Con_Jugabilidad_Bloqueada() {
+	public void NoAvanzarConJugabilidadBloqueada() {
 		AutoJugador pj = new AutoJugador(new Punto(0, 0), "Nahuel"); // Al inicio la jugabilidad esta bloqueada
 
 		pj.acelerar();
@@ -73,7 +73,7 @@ public class VehiculoTest {
 	}
 
 	@Test
-	public void Avanzar_Con_Jugabilidad_Desbloqueada() {
+	public void AvanzarConJugabilidadDesbloqueada() {
 		AutoJugador pj = new AutoJugador(new Punto(0, 0), "Nahuel");// Al inicio la jugabilidad esta bloqueada
 
 		pj.acelerar();
@@ -82,7 +82,7 @@ public class VehiculoTest {
 	}
 
 	@Test
-	public void Avanza_Posiciones_Segun_Velocidad_Actual() {
+	public void AvanzaPosicionesSegunVelocidadActual() {
 		AutoJugador pj = new AutoJugador(new Punto(0, 0), "Nahuel");
 
 		pj.habilitarDesabilitarJugabilidad();
@@ -98,7 +98,7 @@ public class VehiculoTest {
 	}
 
 	@Test
-	public void Frenar_Decrementa_La_Velocidad_En_Uno() {
+	public void FrenarDecrementaLaVelocidadEnUno() {
 		AutoJugador pj = new AutoJugador(new Punto(0, 0), "Nahuel");
 
 		pj.acelerar();// VELOCIDAD=1
@@ -109,7 +109,7 @@ public class VehiculoTest {
 	}
 
 	@Test
-	public void al_Frenar_La_Velocidad_No_Es_Negativa() {
+	public void alFrenarLaVelocidadNoEsNegativa() {
 		AutoJugador pj = new AutoJugador(new Punto(0, 0), "Nahuel");
 
 		pj.acelerar();// VELOCIDAD=1
@@ -126,7 +126,7 @@ public class VehiculoTest {
 	}
 
 	@Test
-	public void Mover_A_La_Derecha() {
+	public void MoverALaDerecha() {
 		AutoJugador pj = new AutoJugador(new Punto(0, 0), "Nahuel");
 
 		pj.habilitarDesabilitarJugabilidad();
@@ -143,7 +143,7 @@ public class VehiculoTest {
 	}
 
 	@Test
-	public void Mover_A_La_Izquiuera() {
+	public void MoverALaIzquiuera() {
 		AutoJugador pj = new AutoJugador(new Punto(0, 0), "Nahuel");
 
 		pj.habilitarDesabilitarJugabilidad();
@@ -160,7 +160,7 @@ public class VehiculoTest {
 	}
 
 	@Test
-	public void Chocar_Y_Reaparecer_Sin_Velocidad_En_El_Centro_Del_Plano() {
+	public void ChocarYReaparecerSinVelocidadEnElCentroDelPlano() {
 		AutoJugador pj = new AutoJugador(new Punto(0, 0), "Nahuel");
 
 		pj.habilitarDesabilitarJugabilidad();

@@ -34,7 +34,7 @@ public class Carretera {
 			if (objetosDeLaCarretera.get(i).getTieneMovimiento()) {
 				if (this.objetoFueraDeMiLimite(objetosDeLaCarretera.get(i))) {
 					System.out.println(
-							objetosDeLaCarretera.get(i).getNombre() + " se salio de los limites de la carretea");
+							objetosDeLaCarretera.get(i).getNombre() + " se salio de los limites de la carretera");
 					objetosDeLaCarretera.get(i).explotar();
 
 					if (objetosDeLaCarretera.get(i).desaparecer) {

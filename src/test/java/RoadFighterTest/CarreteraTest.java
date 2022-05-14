@@ -17,7 +17,7 @@ import RoadFighter.Punto;
 public class CarreteraTest {
 
 	@Test
-	public void Carretera_Calcula_Sus_Limites() {
+	public void CarreteraCalculaSusLimites() {
 		Carretera carretera = new Carretera(953, 1000);
 
 		assertTrue(carretera.getLimDer() == 476.5);
@@ -33,7 +33,7 @@ public class CarreteraTest {
 	}
 
 	@Test
-	public void No_Insertar_Un_Objeto_Fuera_De_Los_Limites() {
+	public void NoInsertarUnObjetoFueraDeLosLimites() {
 		Carretera carretera = new Carretera(300, 1000);// limites -150 y 150
 		AutoJugador pj = new AutoJugador(new Punto(150, 0), "Nahuel");
 		AutoObstaculo bot = new AutoObstaculo(new Punto(-150, 0));
@@ -49,7 +49,7 @@ public class CarreteraTest {
 	}
 
 	@Test
-	public void Insertar_Un_Objeto_Dentro_De_Los_Limites() {
+	public void InsertarUnObjetoDentroDeLosLimites() {
 		Carretera carretera = new Carretera(300, 1000);// limites -150 y 150
 		AutoJugador pj = new AutoJugador(new Punto(0, 30), "Nahuel");
 		AutoObstaculo bot = new AutoObstaculo(new Punto(50, 50));
@@ -65,7 +65,7 @@ public class CarreteraTest {
 	}
 
 	@Test
-	public void Carretera_Detecta_Un_Vehiculo_Dentro_De_Los_Limites_Y_No_Hace_Nada() {
+	public void CarreteraDetectaUnVehiculoDentroDeLosLimitesYNoHaceNada() {
 		Carretera carretera = new Carretera(300, 1000);
 		AutoJugador pj = new AutoJugador(new Punto(134, 50), "Nahuel");
 
@@ -79,7 +79,7 @@ public class CarreteraTest {
 	}
 
 	@Test
-	public void Carretera_Detecta_Que_Un_Vehiculo_Salio_De_Los_Limites() {
+	public void CarreteraDetectaQueUnVehiculoSalioDeLosLimites() {
 		Carretera carretera = new Carretera(300, 1000);
 		AutoJugador pj = new AutoJugador(new Punto(134, 50), "Nahuel");
 
@@ -94,7 +94,7 @@ public class CarreteraTest {
 	}
 
 	@Test
-	public void Carretera_Detecta_Choque_Con_Objeto() {
+	public void CarreteraDetectaChoqueConObjeto() {
 		Carretera carretera = new Carretera(300, 1000);
 		AutoJugador pj = new AutoJugador(new Punto(50, 95), "Nahuel");
 		Pozo pozo = new Pozo(new Punto(50, 130));
@@ -119,7 +119,7 @@ public class CarreteraTest {
 	}
 
 	@Test
-	public void Explotar_Algo_Que_No_Es_Auto_Jugador_Es_Eliminado_De_Los_Objetos_De_La_Carretera() {
+	public void ExplotarAlgoQueNoEsAutoJugadorEsEliminadoDeLosObjetosDeLaCarretera() {
 		Carretera carretera = new Carretera(300, 1000);
 		AutoJugador pj = new AutoJugador(new Punto(50, 95), "Nahuel");
 		Pozo pozo = new Pozo(new Punto(50, 130));
