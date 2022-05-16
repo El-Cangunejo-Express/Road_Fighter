@@ -12,25 +12,25 @@ public class ManchaDeAceite extends ObjetoDelMapa {
 
 	@Override
 	public void choqueConAutoJugador(AutoJugador auto) {
-		System.out.println(auto.getNombre() + " paso sobre " + this.getNombre());
-
+		// System.out.println(auto.getNombre() + " paso sobre " + this.getNombre());
 		if (!auto.getEscudo()) {
 			auto.perderElControl();
 		} else {
 			this.explotar();
-			this.desaparecer = true;
+			this.tengoQueDesaparecer = true;
 			auto.perderEscudo();
 		}
 	}
 
 	@Override
 	public void choqueConAutoObstaculo(AutoObstaculo auto) {
-		System.out.println(auto.getNombre() + " paso sobre " + this.getNombre());
+		// System.out.println(auto.getNombre() + " paso sobre " + this.getNombre());
 		auto.perderElControl();
 	}
 
 	@Override
 	public void choqueConCamion(CamionObstaculo camion) {
-		System.out.println(camion.getNombre() + " paso sobre " + this.getNombre());
+		// System.out.println(camion.getNombre() + " paso sobre " + this.getNombre());
 	}
+
 }

@@ -6,13 +6,15 @@ public class AutoJugador extends Vehiculo {
 	///
 	private boolean tengoEscudo = false;
 	private double coordenadaXoriginal;
+	private Jugador jugador;
 
-	public AutoJugador(Punto coordenada, String nombre) {
+	public AutoJugador(Punto coordenada, Jugador jugador) {
 		this.coordenada = coordenada;
 		this.coordenadaXoriginal = coordenada.getX();
 		this.largo = 40;
 		this.ancho = 30;
-		this.nombre = nombre;
+		this.jugador = jugador;
+		this.nombre = jugador.getNombre();
 		this.tieneMovimiento = true;
 		this.velocidadActual = 0;
 		this.velocidadMaxima = 100;
@@ -28,7 +30,8 @@ public class AutoJugador extends Vehiculo {
 
 	public void reaparecer() {
 		setearValoresIniciales();
-		System.out.println(this.nombre + " ha reaparecido");
+		// System.out.println(this.nombre + " ha reaparecido");
+		jugabilidadBloqueada = false;
 		this.reapareci = true;
 	}
 
@@ -43,6 +46,7 @@ public class AutoJugador extends Vehiculo {
 	@Override
 	public void explotar() {
 		super.explotar();
+		jugabilidadBloqueada = true;
 		this.reaparecer();
 	}
 
@@ -53,8 +57,8 @@ public class AutoJugador extends Vehiculo {
 
 	@Override
 	public void choqueConAutoJugador(AutoJugador auto) {
-		System.out.println(this.getNombre() + " y " + auto.getNombre() + " han chocado");
-
+		// System.out.println(this.getNombre() + " y " + auto.getNombre() + " han
+		// chocado");
 		if (!this.getEscudo()) {
 			if (!auto.getEscudo()) {
 				auto.perderElControl();
@@ -71,15 +75,15 @@ public class AutoJugador extends Vehiculo {
 				auto.explotar();
 				auto.perderEscudo();
 			}
-			
+
 			this.perderEscudo();
 		}
 	}
 
 	@Override
 	public void choqueConAutoObstaculo(AutoObstaculo auto) {
-		System.out.println(this.getNombre() + " y " + auto.getNombre() + " han chocado");
-
+		// System.out.println(this.getNombre() + " y " + auto.getNombre() + " han
+		// chocado");
 		if (!this.getEscudo()) {
 			auto.perderElControl();
 			this.perderElControl();
@@ -91,8 +95,8 @@ public class AutoJugador extends Vehiculo {
 
 	@Override
 	public void choqueConCamion(CamionObstaculo camion) {
-		System.out.println(this.getNombre() + " y " + camion.getNombre() + " han chocado");
-
+		// System.out.println(this.getNombre() + " y " + camion.getNombre() + " han
+		// chocado");
 		if (!this.getEscudo()) {
 			this.explotar();
 		} else {
@@ -113,13 +117,17 @@ public class AutoJugador extends Vehiculo {
 		this.largo = largo;
 	}
 
+	public Jugador getJugador() {
+		return this.jugador;
+	}
+
 	/// METODOS USADOS EN LOS TESTS
 
-	public boolean getReaparecer() {
+	public boolean getReapareci() {
 		return this.reapareci;
 	}
 
-	public boolean getJuganilidadBloqueada() {
+	public boolean getJugabilidadBloqueada() {
 		return this.jugabilidadBloqueada;
 	}
 

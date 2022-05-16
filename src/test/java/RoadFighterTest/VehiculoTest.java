@@ -1,39 +1,46 @@
 package RoadFighterTest;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
+import org.junit.Before;
 import org.junit.Test;
 
 import RoadFighter.AutoJugador;
 import RoadFighter.AutoObstaculo;
 import RoadFighter.CamionObstaculo;
+import RoadFighter.Jugador;
 import RoadFighter.Punto;
 
 public class VehiculoTest {
 
+	private Jugador jugador;
+	private AutoJugador pj;
+	private AutoObstaculo bot;
+	private CamionObstaculo bot2;
+
+	@Before
+	public void inicializaciones() {
+		jugador = new Jugador("Nahuel");
+		pj = new AutoJugador(new Punto(0, 0), jugador);
+		bot = new AutoObstaculo(new Punto(0, 0));
+		bot2 = new CamionObstaculo(new Punto(0, 0));
+	}
+
 	@Test
 	public void vehiculoIniciaEnReposo() {
-		AutoJugador pj = new AutoJugador(new Punto(0, 0), "Nahuel");
-
 		assertEquals((int) pj.getVelocidadActual(), 0);
 	}
 
 	@Test
 	public void acelerarIncrementaEnUnoLaVelocidad() {
-		AutoJugador pj = new AutoJugador(new Punto(0, 0), "Nahuel");
-
 		pj.acelerar();
 		assertEquals((int) pj.getVelocidadActual(), 1);
 	}
 
 	@Test
-	public void JugadorNoPuedeAcelerarPorEncimaDeLaVelocidadMaxima() {
-		AutoJugador pj = new AutoJugador(new Punto(0, 0), "Nahuel");
-
-		// La velocidad maxima es 100
-		for (int i = 0; i < 100; i++) {
+	public void JugadorNoPuedeAcelerarPorEncimaDeVelocidadMaxima() {
+		// Incremento hasta su velocidad maxima
+		for (int i = 0; i < pj.getVelocidadMaxima(); i++) {
 			pj.acelerar();
 		}
 
@@ -41,11 +48,9 @@ public class VehiculoTest {
 	}
 
 	@Test
-	public void AutoBotNoPuedeAcelerarPorEncimaDeLaVelocidadMaxima() {
-		AutoObstaculo bot = new AutoObstaculo(new Punto(0, 0));
-
-		// La velocidad maxima es 80
-		for (int i = 0; i < 80; i++) {
+	public void Auto_Obstaculo_No_Puede_Acelerar_Por_Encima_De_Su_Velocidad_Maxima() {
+		// Incremento hasta su velocidad maxima
+		for (int i = 0; i < bot.getVelocidadMaxima(); i++) {
 			bot.acelerar();
 		}
 
@@ -53,71 +58,68 @@ public class VehiculoTest {
 	}
 
 	@Test
-	public void CamionNoPuedeAcelerarPorEncimaDeLaVelocidadMaxima() {
-		CamionObstaculo bot = new CamionObstaculo(new Punto(0, 0));
-
-		// La velocidad maxima es 60
-		for (int i = 0; i < 60; i++) {
-			bot.acelerar();
+	public void CamionObstaculoNoPuedeAcelerarPorEncimaDeSuVelocidadMaxima() {
+		// Incremento hasta su velocidad maxima
+		for (int i = 0; i < bot2.getVelocidadMaxima(); i++) {
+			bot2.acelerar();
 		}
 
-		assertFalse(bot.acelerar());
+		assertFalse(bot2.acelerar());
 	}
 
 	@Test
 	public void NoAvanzarConJugabilidadBloqueada() {
-		AutoJugador pj = new AutoJugador(new Punto(0, 0), "Nahuel"); // Al inicio la jugabilidad esta bloqueada
-
+		assertTrue(pj.getJugabilidadBloqueada()); // Al inicio la jugabilidad esta bloqueada
 		pj.acelerar();
 		assertFalse(pj.avanzar());
 	}
 
 	@Test
 	public void AvanzarConJugabilidadDesbloqueada() {
-		AutoJugador pj = new AutoJugador(new Punto(0, 0), "Nahuel");// Al inicio la jugabilidad esta bloqueada
-
-		pj.acelerar();
 		pj.habilitarDesabilitarJugabilidad();
+		pj.acelerar();
 		assertTrue(pj.avanzar());
 	}
 
 	@Test
 	public void AvanzaPosicionesSegunVelocidadActual() {
-		AutoJugador pj = new AutoJugador(new Punto(0, 0), "Nahuel");
-
 		pj.habilitarDesabilitarJugabilidad();
-		pj.acelerar();// VELOCIDAD=1
-		pj.acelerar();// VELOCIDAD=2
-		pj.acelerar();// VELOCIDAD=3
-		pj.avanzar();// El vechiculo esta en la posicion 3 del eje Y
-		pj.acelerar();// VELOCIDAD=4
-		pj.acelerar();// VELOCIDAD=5
-		pj.avanzar();// Incremento en 5 la posicion
-		pj.avanzar();// Incremento en 5 la posicion
+		pj.acelerar(); // VELOCIDAD=1
+		pj.acelerar(); // VELOCIDAD=2
+		pj.acelerar(); // VELOCIDAD=3
+		pj.avanzar();
+		assertEquals((int) pj.getCoordenada().getY(), 3);
+		pj.acelerar(); // VELOCIDAD=4
+		pj.acelerar(); // VELOCIDAD=5
+		pj.avanzar();
+		assertEquals((int) pj.getCoordenada().getY(), 8);
+		pj.avanzar();
 		assertEquals((int) pj.getCoordenada().getY(), 13);
 	}
 
 	@Test
 	public void FrenarDecrementaLaVelocidadEnUno() {
-		AutoJugador pj = new AutoJugador(new Punto(0, 0), "Nahuel");
+		pj.acelerar(); // VELOCIDAD=1
+		pj.acelerar(); // VELOCIDAD=2
+		pj.acelerar(); // VELOCIDAD=3
+		assertEquals((int) pj.getVelocidadActual(), 3);
+		pj.frenar();
+		assertEquals((int) pj.getVelocidadActual(), 2);
+		pj.frenar();
+		assertEquals((int) pj.getVelocidadActual(), 1);
+	}
 
+	@Test
+	public void alFrenarLaVelocidadNuncaSeVuelveNegativa() {
 		pj.acelerar();// VELOCIDAD=1
 		pj.acelerar();// VELOCIDAD=2
 		pj.acelerar();// VELOCIDAD=3
 		pj.frenar();// VELOCIDAD=2
 		assertEquals((int) pj.getVelocidadActual(), 2);
-	}
-
-	@Test
-	public void alFrenarLaVelocidadNoEsNegativa() {
-		AutoJugador pj = new AutoJugador(new Punto(0, 0), "Nahuel");
-
-		pj.acelerar();// VELOCIDAD=1
-		pj.acelerar();// VELOCIDAD=2
-		pj.acelerar();// VELOCIDAD=3
-		pj.frenar();// VELOCIDAD=2
 		pj.frenar();// VELOCIDAD=1
+		assertEquals((int) pj.getVelocidadActual(), 1);
 		pj.frenar();// VELOCIDAD=0
+		assertEquals((int) pj.getVelocidadActual(), 0);
 		pj.frenar();// SIGUE=0
 		pj.frenar();// SIGUE=0
 		pj.frenar();// SIGUE=0
@@ -126,9 +128,17 @@ public class VehiculoTest {
 	}
 
 	@Test
-	public void MoverALaDerecha() {
-		AutoJugador pj = new AutoJugador(new Punto(0, 0), "Nahuel");
+	public void NoPuedoFrenarSiLaVelocidadYaEsDeCero() {
+		pj.acelerar(); // VELOCIDAD=1
+		pj.acelerar(); // VELOCIDAD=2
+		pj.frenar(); // VELOCIDAD=1
+		pj.frenar(); // VELOCIDAD=0
 
+		assertFalse(pj.frenar());
+	}
+
+	@Test
+	public void MoverALaDerecha() {
 		pj.habilitarDesabilitarJugabilidad();
 		assertEquals((int) pj.getCoordenada().getX(), 0);
 
@@ -144,8 +154,6 @@ public class VehiculoTest {
 
 	@Test
 	public void MoverALaIzquiuera() {
-		AutoJugador pj = new AutoJugador(new Punto(0, 0), "Nahuel");
-
 		pj.habilitarDesabilitarJugabilidad();
 		assertEquals((int) pj.getCoordenada().getX(), 0);
 
@@ -160,22 +168,24 @@ public class VehiculoTest {
 	}
 
 	@Test
-	public void ChocarYReaparecerSinVelocidadEnElCentroDelPlano() {
-		AutoJugador pj = new AutoJugador(new Punto(0, 0), "Nahuel");
-
+	public void ChocarYReaparecerSinVelocidadEnLaMismaCoordenadaYPeroEnSuCoordenadaXOriginal() {
 		pj.habilitarDesabilitarJugabilidad();
+
 		pj.acelerar();// VELOCIDAD=1
 		pj.acelerar();// VELOCIDAD=2
 		pj.acelerar();// VELOCIDAD=3
 		pj.avanzar();// COORDENADA Y=3
+		assertEquals(pj.getCoordenada(), new Punto(0, 3));
 		pj.avanzar();// COORDENADA Y=6
+		assertEquals(pj.getCoordenada(), new Punto(0, 6));
 		pj.irADerecha();// COORDENADA X=1
+		assertEquals(pj.getCoordenada(), new Punto(1, 6));
 		pj.irADerecha();// COORDENADA X=2
+		assertEquals(pj.getCoordenada(), new Punto(2, 6));
 
 		pj.explotar();
 
 		assertEquals((int) pj.getVelocidadActual(), 0);
-		assertEquals((int) pj.getCoordenada().getX(), 0);
-		assertEquals((int) pj.getCoordenada().getY(), 6);
+		assertEquals(pj.getCoordenada(), new Punto(0, 6));
 	}
 }

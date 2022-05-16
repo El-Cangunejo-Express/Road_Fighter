@@ -1,76 +1,78 @@
 package RoadFighterTest;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
+import org.junit.Before;
 import org.junit.Test;
 
 import RoadFighter.AutoJugador;
 import RoadFighter.AutoObstaculo;
 import RoadFighter.CamionObstaculo;
 import RoadFighter.Carretera;
+import RoadFighter.Jugador;
 import RoadFighter.ManchaDeAceite;
 import RoadFighter.Pozo;
 import RoadFighter.Punto;
 
 public class CarreteraTest {
 
+	private Carretera carretera;
+	private double ancho;
+	private double largo;
+	private Jugador jugador;
+
+	@Before
+	public void inicializacion() {
+		ancho = 300;
+		largo = 1000;
+		carretera = new Carretera(ancho, largo);
+		jugador = new Jugador("Nahuel");
+	}
+
 	@Test
 	public void CarreteraCalculaSusLimites() {
-		Carretera carretera = new Carretera(953, 1000);
+		double limite = ancho / 2;
 
-		assertTrue(carretera.getLimDer() == 476.5);
-		assertTrue(carretera.getLimIzq() == -476.5);
-
-		carretera = new Carretera(400, 1000);
-		assertTrue(carretera.getLimDer() == 200);
-		assertTrue(carretera.getLimIzq() == -200);
-
-		carretera = new Carretera(0, 1000);
-		assertTrue(carretera.getLimDer() == 0);
-		assertTrue(carretera.getLimIzq() == 0);
+		assertTrue(carretera.getLimDer() == limite);
+		assertTrue(carretera.getLimIzq() == -limite);
 	}
 
 	@Test
 	public void NoInsertarUnObjetoFueraDeLosLimites() {
-		Carretera carretera = new Carretera(300, 1000);// limites -150 y 150
-		AutoJugador pj = new AutoJugador(new Punto(150, 0), "Nahuel");
+		AutoJugador pj = new AutoJugador(new Punto(150, 0), jugador);
 		AutoObstaculo bot = new AutoObstaculo(new Punto(-150, 0));
-		CamionObstaculo camion = new CamionObstaculo(new Punto(135, 0));
+		CamionObstaculo bot2 = new CamionObstaculo(new Punto(135, 0));
 		ManchaDeAceite aceite = new ManchaDeAceite(new Punto(-135, 0));
 		Pozo pozo = new Pozo(new Punto(0, -1));
 
 		assertFalse(carretera.agregarObjeto(pj));
 		assertFalse(carretera.agregarObjeto(bot));
-		assertFalse(carretera.agregarObjeto(camion));
+		assertFalse(carretera.agregarObjeto(bot2));
 		assertFalse(carretera.agregarObjeto(aceite));
 		assertFalse(carretera.agregarObjeto(pozo));
 	}
 
 	@Test
 	public void InsertarUnObjetoDentroDeLosLimites() {
-		Carretera carretera = new Carretera(300, 1000);// limites -150 y 150
-		AutoJugador pj = new AutoJugador(new Punto(0, 30), "Nahuel");
+		AutoJugador pj = new AutoJugador(new Punto(0, 30), jugador);
 		AutoObstaculo bot = new AutoObstaculo(new Punto(50, 50));
-		CamionObstaculo camion = new CamionObstaculo(new Punto(100, 100));
+		CamionObstaculo bot2 = new CamionObstaculo(new Punto(100, 100));
 		ManchaDeAceite aceite = new ManchaDeAceite(new Punto(-130, 50));
 		Pozo pozo = new Pozo(new Punto(7, 50));
 
 		assertTrue(carretera.agregarObjeto(pj));
 		assertTrue(carretera.agregarObjeto(bot));
-		assertTrue(carretera.agregarObjeto(camion));
+		assertTrue(carretera.agregarObjeto(bot2));
 		assertTrue(carretera.agregarObjeto(aceite));
 		assertTrue(carretera.agregarObjeto(pozo));
 	}
 
 	@Test
 	public void CarreteraDetectaUnVehiculoDentroDeLosLimitesYNoHaceNada() {
-		Carretera carretera = new Carretera(300, 1000);
-		AutoJugador pj = new AutoJugador(new Punto(134, 50), "Nahuel");
-
+		AutoJugador pj = new AutoJugador(new Punto(134, 50), jugador);
 		pj.habilitarDesabilitarJugabilidad();
-		carretera.agregarObjeto(pj);
+
+		assertTrue(carretera.agregarObjeto(pj));
 
 		carretera.actualizar(); // LO DETECTA DENTRO DE LOS LIMITES, NO EXPLOTA
 
@@ -80,14 +82,12 @@ public class CarreteraTest {
 
 	@Test
 	public void CarreteraDetectaQueUnVehiculoSalioDeLosLimites() {
-		Carretera carretera = new Carretera(300, 1000);
-		AutoJugador pj = new AutoJugador(new Punto(134, 50), "Nahuel");
-
-		pj.habilitarDesabilitarJugabilidad();
+		AutoJugador pj = new AutoJugador(new Punto(134, 50), jugador);
 		carretera.agregarObjeto(pj);
+		pj.habilitarDesabilitarJugabilidad();
 
 		carretera.actualizar(); // LO DETECTA DENTRO DE LOS LIMITES, NO EXPLOTA
-		pj.irADerecha(); // El auto toca el limite derecho
+		pj.irADerecha(); // AL IRME UN LUGAR A LA DERECHA EL CUERPO DEL VEHICULO TOCA EL LIMITE DERECHO
 		carretera.actualizar(); // LO DETECTA Y HACE EXPLOTAR EL VEHICULO
 
 		assertTrue(pj.getExplote());
@@ -95,15 +95,15 @@ public class CarreteraTest {
 
 	@Test
 	public void CarreteraDetectaChoqueConObjeto() {
-		Carretera carretera = new Carretera(300, 1000);
-		AutoJugador pj = new AutoJugador(new Punto(50, 95), "Nahuel");
+		AutoJugador pj = new AutoJugador(new Punto(50, 95), jugador);
 		Pozo pozo = new Pozo(new Punto(50, 130));
 
-		pj.habilitarDesabilitarJugabilidad();
 		carretera.agregarObjeto(pj);
 		carretera.agregarObjeto(pozo);
+
 		carretera.actualizar(); // LO DETECTA DENTRO DE LOS LIMITES, NO HAY CHOQUES
 
+		pj.habilitarDesabilitarJugabilidad();
 		pj.acelerar(); // VEL = 1
 		pj.acelerar(); // VEL = 2
 		pj.acelerar(); // VEL = 3
@@ -112,6 +112,7 @@ public class CarreteraTest {
 
 		pj.avanzar();
 		pj.avanzar(); // ACA YA DEBERIAN COLISIONAR
+
 		carretera.actualizar(); // DETECTA EL CHOQUE, Y LOS HACE EXPLOTAR
 
 		assertTrue(pj.getExplote());
@@ -120,16 +121,15 @@ public class CarreteraTest {
 
 	@Test
 	public void ExplotarAlgoQueNoEsAutoJugadorEsEliminadoDeLosObjetosDeLaCarretera() {
-		Carretera carretera = new Carretera(300, 1000);
-		AutoJugador pj = new AutoJugador(new Punto(50, 95), "Nahuel");
+		AutoJugador pj = new AutoJugador(new Punto(50, 95), jugador);
 		Pozo pozo = new Pozo(new Punto(50, 130));
 
-		pj.habilitarDesabilitarJugabilidad();
 		carretera.agregarObjeto(pj);
 		carretera.agregarObjeto(pozo);
 
 		carretera.actualizar(); // LO DETECTA DENTRO DE LOS LIMITES, NO HAY CHOQUES
 
+		pj.habilitarDesabilitarJugabilidad();
 		pj.acelerar(); // VEL = 1
 		pj.acelerar(); // VEL = 2
 		pj.acelerar(); // VEL = 3
@@ -138,8 +138,11 @@ public class CarreteraTest {
 		pj.avanzar();
 		pj.avanzar(); // ACA YA DEBERIAN COLISIONAR
 
+		assertEquals(carretera.getCantidadDeObjetos(), 2);
+
 		carretera.actualizar(); // DETECTA EL CHOQUE Y EXPLOSION, Y ELIMINA AL POZO SE SU LISTA DE OBJETOS
 
-		assertEquals(carretera.getCantidadDeObjetos(), 1);
+		assertEquals(carretera.getCantidadDeObjetos(), 1); // PASO DE TENER DOS OPBJETOS A TENER UNO SOLO, ELIMINO EL
+															// POZO EXPLOTADO
 	}
 }

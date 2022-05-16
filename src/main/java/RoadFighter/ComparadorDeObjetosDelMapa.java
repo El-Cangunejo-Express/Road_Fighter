@@ -16,10 +16,11 @@ public class ComparadorDeObjetosDelMapa implements Comparator<ObjetoDelMapa> {
 				retorno = -1;
 			} else if (o1.coordenada.getX() > o2.coordenada.getX()) {
 				retorno = 1;
-			}else {
+			} else {
 				retorno = 0;
 			}
 		}
+		
 		return retorno;
 	}
 }

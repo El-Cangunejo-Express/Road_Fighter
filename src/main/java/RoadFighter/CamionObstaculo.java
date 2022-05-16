@@ -19,30 +19,30 @@ public class CamionObstaculo extends Vehiculo {
 
 	@Override
 	public void choqueConAutoJugador(AutoJugador auto) {
-		System.out.println(auto.getNombre() + " ha chocado con " + this.getNombre());
-
+		// System.out.println(auto.getNombre() + " ha chocado con " + this.getNombre());
 		if (!auto.getEscudo()) {
 			auto.explotar();
 		} else {
 			this.explotar();
-			this.desaparecer = true;
+			this.tengoQueDesaparecer = true;
 			auto.perderEscudo();
 		}
 	}
 
 	@Override
 	public void choqueConAutoObstaculo(AutoObstaculo auto) {
-		System.out.println(auto.getNombre() + " ha chocado con " + this.getNombre());
+		// System.out.println(auto.getNombre() + " ha chocado con " + this.getNombre());
 		auto.explotar();
-		auto.desaparecer = true;
+		auto.tengoQueDesaparecer = true;
 	}
 
 	@Override
 	public void choqueConCamion(CamionObstaculo camion) {
-		System.out.println(camion.getNombre() + " ha chocado con " + this.getNombre());
+		// System.out.println(camion.getNombre() + " ha chocado con " +
+		// this.getNombre());
 		camion.explotar();
-		camion.desaparecer = true;
+		camion.tengoQueDesaparecer = true;
 		this.explotar();
-		this.desaparecer = true;
+		this.tengoQueDesaparecer = true;
 	}
 }

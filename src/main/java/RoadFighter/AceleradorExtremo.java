@@ -12,8 +12,8 @@ public class AceleradorExtremo extends PowerUp {
 
 	@Override
 	public void choqueConAutoJugador(AutoJugador auto) {
-		System.out.println(auto.getNombre() + " obtuvo " + this.getNombre());
+		// System.out.println(auto.getNombre() + " obtuvo " + this.getNombre());
 		auto.setVelocidad(200);
-		this.desaparecer = true;
+		this.tengoQueDesaparecer = true;
 	}
 }

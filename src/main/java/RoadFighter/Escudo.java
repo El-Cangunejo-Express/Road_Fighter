@@ -12,8 +12,9 @@ public class Escudo extends PowerUp {
 
 	@Override
 	public void choqueConAutoJugador(AutoJugador auto) {
-		System.out.println(auto.getNombre() + " obtuvo " + this.getNombre());
+		// System.out.println(auto.getNombre() + " obtuvo " + this.getNombre());
 		auto.obtenerEscudo();
-		this.desaparecer = true;
+		this.tengoQueDesaparecer = true;
 	}
+
 }

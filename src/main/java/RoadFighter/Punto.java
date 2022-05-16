@@ -42,11 +42,6 @@ public class Punto {
 	}
 
 	@Override
-	public String toString() {
-		return "Punto (" + x + ", " + y + ")";
-	}
-
-	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;

@@ -7,14 +7,13 @@ public class Partida {
 	private int jugadoresMinimos = 2;
 	private int jugadoresMaximos = 5;
 	private int jugadoresActuales = 0;
-	private Jugador ganador;
+	private Jugador ganador = null;
 	private ArrayList<Jugador> jugadores;
 	private ArrayList<AutoJugador> autosJugadores;
 
 	public Partida() {
 		super();
 		this.carretera = carreteraPredefinida();
-		this.ganador = null;
 		this.jugadores = new ArrayList<Jugador>();
 		this.autosJugadores = new ArrayList<AutoJugador>();
 	}
@@ -24,7 +23,6 @@ public class Partida {
 
 		// AGREGAR TODOS LOS OBJETOS QUE SE DESEE A LA PISTA
 		carretera.agregarObjeto(new Pozo(new Punto(60, 80)));
-
 		return carretera;
 	}
 
@@ -57,12 +55,12 @@ public class Partida {
 
 			for (int i = 0; i < jugadoresActuales; i++) {
 				if (i == 0) {
-					auto = new AutoJugador(new Punto(i, coordendaY), jugadores.get(i).getNombre());
+					auto = new AutoJugador(new Punto(i, coordendaY), jugadores.get(i));
 				} else if (insertarEnLadoDerecho) {
-					auto = new AutoJugador(new Punto(desplazamiento, coordendaY), jugadores.get(i).getNombre());
+					auto = new AutoJugador(new Punto(desplazamiento, coordendaY), jugadores.get(i));
 					insertarEnLadoDerecho = false;
 				} else {
-					auto = new AutoJugador(new Punto(-1 * desplazamiento, coordendaY), jugadores.get(i).getNombre());
+					auto = new AutoJugador(new Punto(-1 * desplazamiento, coordendaY), jugadores.get(i));
 					desplazamiento += 60;
 					insertarEnLadoDerecho = true;
 				}
@@ -75,10 +73,10 @@ public class Partida {
 
 			for (int i = 0; i < jugadoresActuales; i++) {
 				if (insertarEnLadoDerecho) {
-					auto = new AutoJugador(new Punto(desplazamiento, coordendaY), jugadores.get(i).getNombre());
+					auto = new AutoJugador(new Punto(desplazamiento, coordendaY), jugadores.get(i));
 					insertarEnLadoDerecho = false;
 				} else {
-					auto = new AutoJugador(new Punto(-1 * desplazamiento, coordendaY), jugadores.get(i).getNombre());
+					auto = new AutoJugador(new Punto(-1 * desplazamiento, coordendaY), jugadores.get(i));
 					desplazamiento += 60;
 					insertarEnLadoDerecho = true;
 				}
@@ -97,56 +95,42 @@ public class Partida {
 			habilitarDesabilitarJugabilidad();
 			inicie = true;
 		} else {
-			System.out.println("Se necesitan mas jugadores para iniciar");
+			// System.out.println("Se necesitanm mas jugadores para inicar");
 		}
 
 		return inicie;
 	}
 
-	public boolean verificarGanador() {
-		boolean hayGanador = false;
-
-		for (int i = 0; i < jugadoresActuales; i++) {
-			if (autosJugadores.get(i).getCoordenada().getY() >= carretera.getLargo()) {
-				hayGanador = true;
-			}
-		}
-
-		return hayGanador;
-	}
-
 	public void actualizar() {
 		carretera.actualizar();
+		asignarPuntuaciones();
 
-		if (verificarGanador()) {
+		if (ganador != null) {
 			terminar();
 		}
 	}
 
-	public Jugador asignarPuntuaciones() {
-		Jugador ganador = null;
-		Jugador jugador = null;
+	public void asignarPuntuaciones() {
+		int puntuacionMaxima = 10000;
+		AutoJugador auto = null;
 		double avanceEnCarrera = 0;
 		double largoCarretera = this.carretera.getLargo();
 
 		for (int i = 0; i < jugadoresActuales; i++) {
+			auto = autosJugadores.get(i);
 
-			jugador = jugadores.get(i);
-			avanceEnCarrera = autosJugadores.get(i).getCoordenada().getY();
-			jugador.actualizarPuntuacion(10000 * (avanceEnCarrera / largoCarretera));
+			avanceEnCarrera = auto.getCoordenada().getY();
+			auto.getJugador().actualizarPuntuacion(puntuacionMaxima * (avanceEnCarrera / largoCarretera));
 
-			if (i == 0 || ganador.getPuntuacion() < jugador.getPuntuacion()) {
-				ganador = jugador;
+			if (auto.getJugador().getPuntuacion() >= puntuacionMaxima) {
+				ganador = auto.getJugador();
 			}
 		}
-
-		return ganador;
 	}
 
 	public void terminar() {
 		habilitarDesabilitarJugabilidad();
-		this.ganador = asignarPuntuaciones();
-		System.out.println("El ganador fue el jugador: " + this.ganador.getNombre());
+		// System.out.println("El ganador fue el jugador: " + this.ganador.getNombre());
 	}
 
 	/// METODOS USADOS EN LOS TESTS
@@ -157,6 +141,14 @@ public class Partida {
 
 	public Carretera getCarretera() {
 		return this.carretera;
+	}
+
+	public Jugador getGanador() {
+		return this.ganador;
+	}
+
+	public int getJugadoresMaximos() {
+		return this.jugadoresMaximos;
 	}
 
 	///

@@ -11,7 +11,7 @@ public abstract class ObjetoDelMapa {
 	protected double largo;
 	protected String nombre;
 	protected boolean tieneMovimiento;
-	protected boolean desaparecer = false;
+	protected boolean tengoQueDesaparecer = false;
 
 	public Punto getCoordenada() {
 		return this.coordenada;
@@ -40,6 +40,7 @@ public abstract class ObjetoDelMapa {
 
 	public boolean hayColisionCon(ObjetoDelMapa objeto) {
 		boolean hayColision = false;
+
 		double distX = this.coordenada.getDistanciaXCon(objeto.coordenada);
 		double distY = this.coordenada.getDistanciaYCon(objeto.coordenada);
 

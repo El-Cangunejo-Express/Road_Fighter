@@ -5,7 +5,6 @@ import java.util.LinkedList;
 
 public class Carretera {
 	private double largo;
-	private double ancho;
 	private double limIzq;
 	private double limDer;
 	private LinkedList<ObjetoDelMapa> objetosDeLaCarretera = new LinkedList<ObjetoDelMapa>();
@@ -13,8 +12,7 @@ public class Carretera {
 	public Carretera(double ancho, double longitud) {
 		super();
 		this.largo = longitud;
-		this.ancho = ancho;
-		this.limDer = this.ancho / 2;
+		this.limDer = ancho / 2;
 		this.limIzq = -1 * limDer;
 	}
 
@@ -33,11 +31,11 @@ public class Carretera {
 		for (int i = 0; i < objetosDeLaCarretera.size(); i++) {
 			if (objetosDeLaCarretera.get(i).getTieneMovimiento()) {
 				if (this.objetoFueraDeMiLimite(objetosDeLaCarretera.get(i))) {
-					System.out.println(
-							objetosDeLaCarretera.get(i).getNombre() + " se salio de los limites de la carretera");
+					// System.out.println(objetosDeLaCarretera.get(i).getNombre() + " se salio de
+					// los limites de la carretea");
 					objetosDeLaCarretera.get(i).explotar();
 
-					if (objetosDeLaCarretera.get(i).desaparecer) {
+					if (objetosDeLaCarretera.get(i).tengoQueDesaparecer) {
 						objetosDeLaCarretera.remove(i);
 						i--;
 					}
@@ -61,27 +59,23 @@ public class Carretera {
 				if (objeto1.hayColisionCon(objeto2)) {
 					if (objeto1.getTieneMovimiento()) {
 						Vehiculo vehiculo = (Vehiculo) objeto1;
-
 						vehiculo.choqueConObjeto(objeto2);
 					} else {
 						Vehiculo vehiculo = (Vehiculo) objeto2;
-
 						vehiculo.choqueConObjeto(objeto1);
 					}
 
-					boorrarObj1 = objeto1.desaparecer;
-					boorrarObj2 = objeto2.desaparecer;
+					boorrarObj1 = objeto1.tengoQueDesaparecer;
+					boorrarObj2 = objeto2.tengoQueDesaparecer;
 
 					if (boorrarObj1 && boorrarObj2) {
 						objetosDeLaCarretera.remove(i);
 						objetosDeLaCarretera.remove(i);
 						i--;
-
 						break;
 					} else if (boorrarObj1 && !boorrarObj2) {
 						objetosDeLaCarretera.remove(i);
 						i--;
-
 						break;
 					} else if (!boorrarObj1 && boorrarObj2) {
 						objetosDeLaCarretera.remove(j);
@@ -89,6 +83,7 @@ public class Carretera {
 					}
 				}
 			}
+
 		}
 	}
 
