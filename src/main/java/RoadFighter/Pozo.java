@@ -39,4 +39,10 @@ public class Pozo extends ObjetoDelMapa {
 		this.explotar();
 		this.tengoQueDesaparecer = true;
 	}
+
+	@Override
+	public void destroy() {
+		// TODO Auto-generated method stub
+		
+	}
 }

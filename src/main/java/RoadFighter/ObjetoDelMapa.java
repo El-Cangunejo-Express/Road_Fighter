@@ -1,5 +1,12 @@
 package RoadFighter;
 
+import RoadFighter.utils.IndividualSpriteAnimation;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.shape.Rectangle;
+import javafx.util.Duration;
+
+//agregado GameObject
 public abstract class ObjetoDelMapa {
 
 	/// ATRIBUTOD USADOS EN LOS TESTS
@@ -12,6 +19,15 @@ public abstract class ObjetoDelMapa {
 	protected String nombre;
 	protected boolean tieneMovimiento;
 	protected boolean tengoQueDesaparecer = false;
+
+	protected IndividualSpriteAnimation animacionExplosion;
+	protected Image imagenSprites = new Image("file:src/main/resources/Imagenes/Road Fighter-General-Sprites.png", 500,
+			350, false, false);
+	protected ImageView render;
+	protected Rectangle collider;
+	protected final double colliderTolerance = 0.75;
+	protected final int colliderWidth = (int) (30 * colliderTolerance);
+	protected final int colliderHeight = (int) (40 * colliderTolerance);
 
 	public Punto getCoordenada() {
 		return this.coordenada;
@@ -34,7 +50,15 @@ public abstract class ObjetoDelMapa {
 	}
 
 	public void explotar() {
-		// System.out.println(this.nombre + " ha explotado");
+		explote = true;
+	}
+
+	public void explotar(ImageView render) {
+		// La imagen de la explosion esta en el (70,70), aca esta en la explosion
+		// Esta es la posicion de las explosiones y el auto destruido
+		animacionExplosion = new IndividualSpriteAnimation(render, Duration.millis(3000), 4, 5, 45, 70, 3, 20, 30);
+		animacionExplosion.setCycleCount(1);
+		animacionExplosion.play();
 		explote = true;
 	}
 
@@ -72,5 +96,5 @@ public abstract class ObjetoDelMapa {
 	}
 
 	///
-
+	public abstract void destroy();
 }

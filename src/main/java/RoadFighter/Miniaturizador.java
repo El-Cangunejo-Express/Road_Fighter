@@ -17,4 +17,10 @@ public class Miniaturizador extends PowerUp {
 		auto.setLargo(20);
 		this.tengoQueDesaparecer = true;
 	}
+
+	@Override
+	public void destroy() {
+		// TODO Auto-generated method stub
+		
+	}
 }

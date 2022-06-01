@@ -3,17 +3,35 @@ package RoadFighter;
 import java.util.Collections;
 import java.util.LinkedList;
 
-public class Carretera {
+import RoadFighter.interfaces.Renderable;
+import RoadFighter.interfaces.Updatable;
+import javafx.scene.Node;
+import javafx.scene.image.Image;
+import javafx.scene.layout.HBox;
+import javafx.scene.paint.Color;
+import javafx.scene.paint.ImagePattern;
+import javafx.scene.shape.Rectangle;
+
+public class Carretera extends ObjetoDelMapa implements Updatable, Renderable {
 	private double largo;
 	private double limIzq;
 	private double limDer;
 	private LinkedList<ObjetoDelMapa> objetosDeLaCarretera = new LinkedList<ObjetoDelMapa>();
+
+	private HBox render;
+	private double posY = 0;
+	private double anchoCalle;
+	private final int borderWidth = 150; // por defecto para los bordes de las esquinas
+	
+	private boolean acelera = false; //temporal
 
 	public Carretera(double ancho, double longitud) {
 		super();
 		this.largo = longitud;
 		this.limDer = ancho / 2;
 		this.limIzq = -1 * limDer;
+		this.anchoCalle = ancho;
+		this.initFondo();
 	}
 
 	private boolean objetoFueraDeMiLimite(ObjetoDelMapa objeto) {
@@ -25,6 +43,27 @@ public class Carretera {
 		}
 
 		return estaFueraDelLimite;
+	}
+
+	private void initFondo() {
+		Image backgroundImage = new Image("file:src/main/resources/Imagenes/calle.jpg", this.anchoCalle, this.largo,
+				false, false);
+
+		ImagePattern image_pattern = new ImagePattern(backgroundImage, this.anchoCalle, this.largo, this.anchoCalle,
+				this.largo, false);
+
+		Rectangle izq = new Rectangle(borderWidth, Config.baseHeight + this.largo);
+		Rectangle calle = new Rectangle(this.anchoCalle, Config.baseHeight + this.largo);
+		Rectangle der = new Rectangle(borderWidth, Config.baseHeight + this.largo);
+
+		izq.setFill(Color.rgb(84, 192, 201));
+		calle.setFill(image_pattern);
+		der.setFill(Color.rgb(100, 224, 117));
+
+		render = new HBox(izq, calle, der);
+		// TODO zIndex list
+		render.setViewOrder(10);
+		render.setLayoutY(-this.largo); // esto me permite subir la imagen para dar la sensacion de que el auto avanza
 	}
 
 	private void detectarObjetoFueraDeCarretera() {
@@ -125,5 +164,51 @@ public class Carretera {
 		return this.objetosDeLaCarretera.size();
 	}
 
+	@Override
+	public Node getRender() {
+		return render;
+	}
+
+	@Override
+	public void update(double deltaTime) {
+		posY += Config.baseSpeed * deltaTime * 01.01;
+
+		if (acelera) {
+			render.setTranslateY(posY % this.largo); // Este mueve el fondo
+		}
+		
+		this.actualizar();
+	}
+
 	///
+
+	@Override
+	public void choqueConAutoJugador(AutoJugador auto) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void choqueConAutoObstaculo(AutoObstaculo auto) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void choqueConCamion(CamionObstaculo camion) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void destroy() {
+		// TODO Auto-generated method stub
+
+	}
+	
+	////temporal, para pruebas
+	public void setAcelera(boolean cond) {
+		acelera = cond;
+	}
+	
 }

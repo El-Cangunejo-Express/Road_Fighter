@@ -33,4 +33,10 @@ public class ManchaDeAceite extends ObjetoDelMapa {
 		// System.out.println(camion.getNombre() + " paso sobre " + this.getNombre());
 	}
 
+	@Override
+	public void destroy() {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

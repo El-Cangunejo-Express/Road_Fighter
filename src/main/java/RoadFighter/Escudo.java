@@ -17,4 +17,10 @@ public class Escudo extends PowerUp {
 		this.tengoQueDesaparecer = true;
 	}
 
+	@Override
+	public void destroy() {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

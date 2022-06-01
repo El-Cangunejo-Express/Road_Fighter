@@ -16,4 +16,10 @@ public class AceleradorExtremo extends PowerUp {
 		auto.setVelocidad(200);
 		this.tengoQueDesaparecer = true;
 	}
+
+	@Override
+	public void destroy() {
+		// TODO Auto-generated method stub
+		
+	}
 }
