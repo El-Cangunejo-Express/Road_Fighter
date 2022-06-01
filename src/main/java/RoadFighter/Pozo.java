@@ -1,5 +1,8 @@
 package RoadFighter;
 
+import javafx.geometry.Rectangle2D;
+import javafx.scene.image.ImageView;
+
 public class Pozo extends ObjetoDelMapa {
 
 	public Pozo(Punto coordenada) {
@@ -8,6 +11,13 @@ public class Pozo extends ObjetoDelMapa {
 		this.ancho = 20;
 		this.nombre = "pozo";
 		this.tieneMovimiento = false;
+		
+		this.iniImagen();
+	}
+
+	private void iniImagen() {
+		render = new ImageView(imagenSprites);
+		render.setViewport(new Rectangle2D(175, 200, 30, 30)); // Pozo
 	}
 
 	@Override
@@ -43,6 +53,6 @@ public class Pozo extends ObjetoDelMapa {
 	@Override
 	public void destroy() {
 		// TODO Auto-generated method stub
-		
+
 	}
 }

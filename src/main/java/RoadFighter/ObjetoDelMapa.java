@@ -68,7 +68,8 @@ public abstract class ObjetoDelMapa {
 		double distX = this.coordenada.getDistanciaXCon(objeto.coordenada);
 		double distY = this.coordenada.getDistanciaYCon(objeto.coordenada);
 
-		if ((distX <= this.ancho / 2 + objeto.ancho / 2) && (distY <= this.largo / 2 + objeto.largo / 2)) {
+		//if ((distX <= this.ancho / 2 + objeto.ancho / 2) && (distY <= this.largo / 2 + objeto.largo / 2)) {
+		if(distX == 0 && distY == 0) {
 			hayColision = true;
 		}
 

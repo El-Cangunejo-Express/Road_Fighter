@@ -77,4 +77,9 @@ public class Punto {
 		return true;
 	}
 
+	@Override
+	public String toString() {
+		return "Punto [x=" + x + ", y=" + y + "]";
+	}
+
 }

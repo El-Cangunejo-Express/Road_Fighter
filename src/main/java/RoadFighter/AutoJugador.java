@@ -78,15 +78,17 @@ public class AutoJugador extends Vehiculo implements Updatable, Renderable, Coll
 
 	@Override
 	public void explotar() {
-		jugabilidadBloqueada = true;
-		this.explote = true;
+		if (!explote) {
+			jugabilidadBloqueada = true;
+			this.explote = true;
 
-		// La imagen de la explosion esta en el (70,70), aca esta en la explosion
-		// Esta es la posicion de las explosiones y el auto destruido
-		animacionExplosion = new IndividualSpriteAnimation(render, Duration.millis(3000), 5, 5, 45, 70, 3, 20, 30);
-		animacionExplosion.setCycleCount(1);
-		animacionExplosion.setOnFinished(e -> this.reaparecer());
-		animacionExplosion.play();
+			// La imagen de la explosion esta en el (70,70), aca esta en la explosion
+			// Esta es la posicion de las explosiones y el auto destruido
+			animacionExplosion = new IndividualSpriteAnimation(render, Duration.millis(3000), 5, 5, 45, 70, 3, 20, 30);
+			animacionExplosion.setCycleCount(1);
+			animacionExplosion.setOnFinished(e -> this.reaparecer());
+			animacionExplosion.play();
+		}
 	}
 
 	@Override
@@ -96,33 +98,31 @@ public class AutoJugador extends Vehiculo implements Updatable, Renderable, Coll
 
 	@Override
 	public void choqueConAutoJugador(AutoJugador auto) {
-		// System.out.println(this.getNombre() + " y " + auto.getNombre() + " han
-		// chocado");
-		if (!this.getEscudo()) {
-			if (!auto.getEscudo()) {
-				auto.perderElControl();
-				this.perderElControl();
-			} else {
-				this.explotar();
-				auto.perderEscudo();
-			}
-		} else {
-			if (!auto.getEscudo()) {
-				auto.explotar();
-			} else {
-				this.explotar();
-				auto.explotar();
-				auto.perderEscudo();
-			}
-
-			this.perderEscudo();
-		}
+		this.explotar();
+		auto.explotar();
+//		if (!this.getEscudo()) {
+//			if (!auto.getEscudo()) {
+//				auto.perderElControl();
+//				this.perderElControl();
+//			} else {
+//				this.explotar();
+//				auto.perderEscudo();
+//			}
+//		} else {
+//			if (!auto.getEscudo()) {
+//				auto.explotar();
+//			} else {
+//				this.explotar();
+//				auto.explotar();
+//				auto.perderEscudo();
+//			}
+//
+//			this.perderEscudo();
+//		}
 	}
 
 	@Override
 	public void choqueConAutoObstaculo(AutoObstaculo auto) {
-		// System.out.println(this.getNombre() + " y " + auto.getNombre() + " han
-		// chocado");
 		if (!this.getEscudo()) {
 			auto.perderElControl();
 			this.perderElControl();
@@ -134,8 +134,6 @@ public class AutoJugador extends Vehiculo implements Updatable, Renderable, Coll
 
 	@Override
 	public void choqueConCamion(CamionObstaculo camion) {
-		// System.out.println(this.getNombre() + " y " + camion.getNombre() + " han
-		// chocado");
 		if (!this.getEscudo()) {
 			this.explotar();
 		} else {
@@ -174,7 +172,7 @@ public class AutoJugador extends Vehiculo implements Updatable, Renderable, Coll
 		return this.tengoEscudo;
 	}
 	///
-	
+
 	@Override
 	public Shape getCollider() {
 		return collider;
@@ -182,8 +180,6 @@ public class AutoJugador extends Vehiculo implements Updatable, Renderable, Coll
 
 	@Override
 	public void collide(Collideable collideable) {
-		// TODO Auto-generated method stub
-
 	}
 
 	@Override
@@ -192,13 +188,17 @@ public class AutoJugador extends Vehiculo implements Updatable, Renderable, Coll
 	}
 
 	public void irDerecha() {
-		if (!this.jugabilidadBloqueada)
+		if (!this.jugabilidadBloqueada) {
 			render.setX(render.getX() + 1);
+			this.coordenada.sumarX(1);
+		}
 	}
 
 	public void irIzquierda() {
-		if (!this.jugabilidadBloqueada)
+		if (!this.jugabilidadBloqueada) {
 			render.setX(render.getX() - 1);
+			this.coordenada.restarX(1);
+		}
 	}
 
 	@Override
@@ -207,8 +207,6 @@ public class AutoJugador extends Vehiculo implements Updatable, Renderable, Coll
 
 	@Override
 	public void destroy() {
-		// TODO Auto-generated method stub
-
 	}
 
 }

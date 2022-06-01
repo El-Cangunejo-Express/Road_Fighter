@@ -1,5 +1,8 @@
 package RoadFighter;
 
+import javafx.geometry.Rectangle2D;
+import javafx.scene.image.ImageView;
+
 public class ManchaDeAceite extends ObjetoDelMapa {
 
 	public ManchaDeAceite(Punto coordenada) {
@@ -8,6 +11,13 @@ public class ManchaDeAceite extends ObjetoDelMapa {
 		this.ancho = 20;
 		this.nombre = "Mancha de Aceite";
 		this.tieneMovimiento = false;
+
+		this.iniImagen();
+	}
+
+	private void iniImagen() {
+		render = new ImageView(imagenSprites);
+		render.setViewport(new Rectangle2D(175, 150, 30, 43)); // aceite
 	}
 
 	@Override
@@ -36,7 +46,7 @@ public class ManchaDeAceite extends ObjetoDelMapa {
 	@Override
 	public void destroy() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 }

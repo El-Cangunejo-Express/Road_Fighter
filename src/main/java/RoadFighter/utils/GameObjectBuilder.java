@@ -3,6 +3,7 @@ package RoadFighter.utils;
 import java.util.ArrayList;
 import java.util.List;
 
+import RoadFighter.AutoJugador;
 import RoadFighter.ObjetoDelMapa;
 import RoadFighter.interfaces.Collidator;
 import RoadFighter.interfaces.Collideable;
@@ -32,7 +33,7 @@ public class GameObjectBuilder {
 		if (this.rootNode == null) {
 			this.rootNode = rootNode;
 			rootNode.getChildren().add(objectsGroup);
-			//rootNode.getChildren().add(collidersGroup);
+			// rootNode.getChildren().add(collidersGroup);
 		} else {
 			throw new RuntimeException("Root node already configured");
 		}
@@ -45,39 +46,49 @@ public class GameObjectBuilder {
 		return instance;
 	}
 
+	public void add(ArrayList<AutoJugador> autosJugadores) {
+		for (ObjetoDelMapa go : autosJugadores) {
+			allGameObjects.add(go);
+			addIntoTables(go);
+		}
+	}
+
 	public void add(ObjetoDelMapa... gameObjects) {
 		checkRootNode();
 
 		for (ObjetoDelMapa gameObject : gameObjects) {
 			allGameObjects.add(gameObject);
+			addIntoTables(gameObject);
+		}
+	}
 
-			if (Updatable.class.isAssignableFrom(gameObject.getClass())) {
-				updatables.add((Updatable) gameObject);
-			}
+	private void addIntoTables(ObjetoDelMapa gameObject) {
+		if (Updatable.class.isAssignableFrom(gameObject.getClass())) {
+			updatables.add((Updatable) gameObject);
+		}
 
-			if (Renderable.class.isAssignableFrom(gameObject.getClass())) {
-				Renderable renderableGameObject = (Renderable) gameObject;
-				renderables.add(renderableGameObject);
+		if (Renderable.class.isAssignableFrom(gameObject.getClass())) {
+			Renderable renderableGameObject = (Renderable) gameObject;
+			renderables.add(renderableGameObject);
 
-				objectsGroup.getChildren().add(renderableGameObject.getRender());
-			}
+			objectsGroup.getChildren().add(renderableGameObject.getRender());
+		}
 
-			if (Collidator.class.isAssignableFrom(gameObject.getClass())) {
-				Collidator collidatorGameObject = (Collidator) gameObject;
-				collidators.add(collidatorGameObject);
+		if (Collidator.class.isAssignableFrom(gameObject.getClass())) {
+			Collidator collidatorGameObject = (Collidator) gameObject;
+			collidators.add(collidatorGameObject);
 
-				collidersGroup.getChildren().add(collidatorGameObject.getCollider());
-			} else if (Collideable.class.isAssignableFrom(gameObject.getClass())) {
-				Collideable collideableGameObject = (Collideable) gameObject;
-				collideables.add(collideableGameObject);
+			collidersGroup.getChildren().add(collidatorGameObject.getCollider());
+		} else if (Collideable.class.isAssignableFrom(gameObject.getClass())) {
+			Collideable collideableGameObject = (Collideable) gameObject;
+			collideables.add(collideableGameObject);
 
-				collidersGroup.getChildren().add(collideableGameObject.getCollider());
-			}
+			collidersGroup.getChildren().add(collideableGameObject.getCollider());
 		}
 	}
 
 	public void remove(ObjetoDelMapa... gameObjects) {
-		//checkRootNode();
+		// checkRootNode();
 
 		for (ObjetoDelMapa gameObject : gameObjects) {
 			allGameObjects.remove(gameObject);

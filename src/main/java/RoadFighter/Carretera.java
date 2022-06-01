@@ -22,23 +22,25 @@ public class Carretera extends ObjetoDelMapa implements Updatable, Renderable {
 	private double posY = 0;
 	private double anchoCalle;
 	private final int borderWidth = 150; // por defecto para los bordes de las esquinas
-	
-	private boolean acelera = false; //temporal
+
+	private boolean acelera = false; // temporal
 
 	public Carretera(double ancho, double longitud) {
 		super();
 		this.largo = longitud;
-		this.limDer = ancho / 2;
-		this.limIzq = -1 * limDer;
+		this.limDer = ancho;
+		this.limIzq = 80;
 		this.anchoCalle = ancho;
 		this.initFondo();
 	}
 
 	private boolean objetoFueraDeMiLimite(ObjetoDelMapa objeto) {
 		boolean estaFueraDelLimite = false;
-		double xObjeto = objeto.getCoordenada().getX();
+		//double xObjeto = objeto.getCoordenada().getX();
 
-		if ((xObjeto - objeto.getAncho() / 2) <= this.limIzq || (xObjeto + objeto.getAncho() / 2) >= this.limDer) {
+		// if ((xObjeto - objeto.getAncho() / 2) <= this.limIzq || (xObjeto +
+		// objeto.getAncho() / 2) >= this.limDer) {
+		if (objeto.coordenada.getX() < this.limIzq || objeto.coordenada.getX() > this.limDer) {
 			estaFueraDelLimite = true;
 		}
 
@@ -56,7 +58,7 @@ public class Carretera extends ObjetoDelMapa implements Updatable, Renderable {
 		Rectangle calle = new Rectangle(this.anchoCalle, Config.baseHeight + this.largo);
 		Rectangle der = new Rectangle(borderWidth, Config.baseHeight + this.largo);
 
-		izq.setFill(Color.rgb(84, 192, 201));
+		izq.setFill(Color.rgb(100, 224, 117));
 		calle.setFill(image_pattern);
 		der.setFill(Color.rgb(100, 224, 117));
 
@@ -70,8 +72,6 @@ public class Carretera extends ObjetoDelMapa implements Updatable, Renderable {
 		for (int i = 0; i < objetosDeLaCarretera.size(); i++) {
 			if (objetosDeLaCarretera.get(i).getTieneMovimiento()) {
 				if (this.objetoFueraDeMiLimite(objetosDeLaCarretera.get(i))) {
-					// System.out.println(objetosDeLaCarretera.get(i).getNombre() + " se salio de
-					// los limites de la carretea");
 					objetosDeLaCarretera.get(i).explotar();
 
 					if (objetosDeLaCarretera.get(i).tengoQueDesaparecer) {
@@ -91,16 +91,18 @@ public class Carretera extends ObjetoDelMapa implements Updatable, Renderable {
 
 		for (int i = 0; i < objetosDeLaCarretera.size() - 1; i++) {
 			objeto1 = objetosDeLaCarretera.get(i);
-
+			
 			for (int j = i + 1; j < objetosDeLaCarretera.size(); j++) {
 				objeto2 = objetosDeLaCarretera.get(j);
-
+				
 				if (objeto1.hayColisionCon(objeto2)) {
 					if (objeto1.getTieneMovimiento()) {
 						Vehiculo vehiculo = (Vehiculo) objeto1;
+						
 						vehiculo.choqueConObjeto(objeto2);
 					} else {
 						Vehiculo vehiculo = (Vehiculo) objeto2;
+						
 						vehiculo.choqueConObjeto(objeto1);
 					}
 
@@ -111,10 +113,12 @@ public class Carretera extends ObjetoDelMapa implements Updatable, Renderable {
 						objetosDeLaCarretera.remove(i);
 						objetosDeLaCarretera.remove(i);
 						i--;
+						
 						break;
 					} else if (boorrarObj1 && !boorrarObj2) {
 						objetosDeLaCarretera.remove(i);
 						i--;
+						
 						break;
 					} else if (!boorrarObj1 && boorrarObj2) {
 						objetosDeLaCarretera.remove(j);
@@ -128,10 +132,11 @@ public class Carretera extends ObjetoDelMapa implements Updatable, Renderable {
 
 	public boolean agregarObjeto(ObjetoDelMapa objeto) {
 		boolean pudeAgregar = false;
-		double yObjeto = objeto.getCoordenada().getY();
+		double xObjeto = objeto.getCoordenada().getX();
 
-		if (!this.objetoFueraDeMiLimite(objeto)
-				&& ((yObjeto - objeto.getLargo() / 2) >= 0 && (yObjeto + objeto.getLargo() / 2) <= this.largo)) {
+		// if (!this.objetoFueraDeMiLimite(objeto) && ((xObjeto - objeto.getAncho() / 2)
+		// >= 0 && (xObjeto + objeto.getAncho() / 2) <= this.largo)) {
+		if (!this.objetoFueraDeMiLimite(objeto)) {
 			objetosDeLaCarretera.add(objeto);
 			pudeAgregar = true;
 		}
@@ -176,7 +181,7 @@ public class Carretera extends ObjetoDelMapa implements Updatable, Renderable {
 		if (acelera) {
 			render.setTranslateY(posY % this.largo); // Este mueve el fondo
 		}
-		
+
 		this.actualizar();
 	}
 
@@ -184,31 +189,26 @@ public class Carretera extends ObjetoDelMapa implements Updatable, Renderable {
 
 	@Override
 	public void choqueConAutoJugador(AutoJugador auto) {
-		// TODO Auto-generated method stub
 
 	}
 
 	@Override
 	public void choqueConAutoObstaculo(AutoObstaculo auto) {
-		// TODO Auto-generated method stub
 
 	}
 
 	@Override
 	public void choqueConCamion(CamionObstaculo camion) {
-		// TODO Auto-generated method stub
 
 	}
 
 	@Override
 	public void destroy() {
-		// TODO Auto-generated method stub
-
 	}
-	
-	////temporal, para pruebas
+
+	//// temporal, para pruebas
 	public void setAcelera(boolean cond) {
 		acelera = cond;
 	}
-	
+
 }
