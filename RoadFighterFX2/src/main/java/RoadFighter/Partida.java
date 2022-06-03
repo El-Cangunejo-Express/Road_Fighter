@@ -29,7 +29,7 @@ import javafx.stage.Stage;
 import RoadFighter.utils.AudioResources;
 import RoadFighter.utils.Titulo;
 
-public class Main extends Application {
+public class Partida extends Application {
 
 	private static final double NANOS_IN_SECOND_D = 1_000_000_000.0;
 
