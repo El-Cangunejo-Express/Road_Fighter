@@ -61,7 +61,7 @@ public class AudioResources extends GameObject implements Renderable{
 	}				
 	
 	public void playAudioIntro() {		
-			audioIntro.play();			
+			audioIntro.play();	
 	}
 	
 	public AudioClip getAudioIntro() {

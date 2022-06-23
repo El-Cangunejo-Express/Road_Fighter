@@ -43,7 +43,7 @@ public class Score extends GameObject implements Renderable{
 		puntaje.setFont(font2);		
 		
 		DropShadow ds = new DropShadow();
-		ds.setColor(Color.WHITE);
+		ds.setColor(Color.BLACK);
 		scoreText.setEffect(ds);
 	}
 	

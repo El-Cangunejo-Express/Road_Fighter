@@ -27,6 +27,7 @@ public class Carretera extends GameObject implements Renderable{
 		GuardarrailIzquierdo guardarrailIzq = new GuardarrailIzquierdo(118, 720);
 		GuardarrailDerecho guardarrailDer = new GuardarrailDerecho(610, 720);
 		AdornoCarretera adorno = new AdornoCarretera(360, 625);
+		Tree tree = new Tree(670, 720);
 		Meta meta = new Meta(364, -19900);
 		
 		Pozo pozo1 = new Pozo(242, -1000);						/// pozos y aceites 242-325-408-491 salvo excepciones
@@ -124,6 +125,7 @@ public class Carretera extends GameObject implements Renderable{
 		GameObjects.add(guardarrailIzq);
 		GameObjects.add(guardarrailDer);
 		GameObjects.add(adorno);
+		GameObjects.add(tree);
 		GameObjects.add(meta);
 
 		GameObjects.add(pozo1);

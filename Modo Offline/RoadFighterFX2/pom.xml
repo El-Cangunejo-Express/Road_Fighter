@@ -42,7 +42,7 @@
 				<artifactId>javafx-maven-plugin</artifactId>
 				<version>${javafx.maven.plugin.version}</version>
 				<configuration>
-					<mainClass>RoadFighter.Partida</mainClass>
+					<mainClass>RoadFighter.Main</mainClass>
 				</configuration>
 			</plugin>
 		</plugins>

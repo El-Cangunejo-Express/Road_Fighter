@@ -88,6 +88,10 @@ public abstract class Vehiculo extends ObjetoDeMapa implements Colisionador{
 		return speed;
 	}
 	
+	public void setSpeed(double speed) {
+		this.speed = speed;
+	}
+	
 	public double getMaxSpeed() {
 		return maxSpeed;
 	}	
