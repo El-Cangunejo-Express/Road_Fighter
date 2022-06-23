@@ -127,7 +127,7 @@ public class AutoJugador extends Vehiculo {
 		}
 	}
 
-	public void setSpeed(double speed) {
+	public void setNewSpeed(double speed) {
 		this.maxSpeed = speed;
 		this.speed = this.maxSpeed;
 		this.tengoAcelerador = true;

@@ -24,7 +24,7 @@ public class AceleradorExtremo extends PowerUp {
 	public void colisionasteConAutoJugador(AutoJugador auto) {
 		this.desaparecer();
 		auto.bloquearAceleracion();
-		auto.setSpeed(2000);
+		auto.setNewSpeed(2000);
 	}
 
 }
